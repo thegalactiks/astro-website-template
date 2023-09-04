@@ -1,0 +1,24 @@
+---
+import type { Content } from "@withmoons/explorer";
+
+import Footer from "@components/Footer.astro";
+import Navbar from "@components/Navbar.astro";
+import BaseLayout from "./BaseLayout.astro";
+import Container from "@components/Container.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+---
+
+<BaseLayout content={content}>
+  <Navbar />
+
+  <main>
+    <Container>
+      <slot />
+    </Container>
+  </main>
+
+  <Footer />
+</BaseLayout>

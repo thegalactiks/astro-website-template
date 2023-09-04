@@ -1,0 +1,48 @@
+---
+import type { Content } from "@withmoons/explorer";
+
+import Article from "@components/Article.astro";
+import PageLayout from "./PageLayout.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+---
+
+<PageLayout content={content}>
+  <div class="mx-auto max-w-3xl mt-16">
+    {
+      content.isPartOf && (
+        <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
+          {content.isPartOf}
+        </span>
+      )
+    }
+    <h1
+      class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-2 lg:leading-tight"
+    >
+      {content.name}
+    </h1>
+    <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
+      <time
+        class="text-gray-500 text-sm"
+        datetime={content.datePublished.toISOString()}
+      >
+        {content.datePublished.toDateString()}
+      </time>
+      {
+        Array.isArray(content.keywords) && (
+          <div class="w-full md:w-auto flex flex-wrap gap-3">
+            {content.keywords.map((keyword) => (
+              <span class="text-sm text-gray-400">#{keyword}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+
+  <Article class="mx-auto mt-6 max-w-3xl">
+    <slot />
+  </Article>
+</PageLayout>

@@ -1,0 +1,13 @@
+---
+import { getConfig } from "@withmoons/config";
+
+const {
+  webManifest: { name },
+} = getConfig();
+---
+
+<footer class="my-20">
+  <p class="text-center text-sm text-slate-500">
+    {name}
+  </p>
+</footer>

@@ -1,0 +1,10 @@
+---
+import { getConfig } from "@withmoons/config";
+import { Image } from "astro:assets";
+
+const {
+  webManifest: { icons, name },
+} = getConfig();
+---
+
+{icons.length > 0 && <Image src={icons[0].src} alt={name} />}

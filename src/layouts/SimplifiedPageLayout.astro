@@ -1,0 +1,24 @@
+---
+import type { Content } from "@withmoons/explorer";
+
+import Article from "@components/Article.astro";
+import PageLayout from "./PageLayout.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+---
+
+<PageLayout content={content}>
+  <div class="mx-auto max-w-3xl mt-14">
+    <h1
+      class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight"
+    >
+      {content.name}
+    </h1>
+  </div>
+
+  <div class="mx-auto mt-6 max-w-3xl">
+    <slot />
+  </div>
+</PageLayout>

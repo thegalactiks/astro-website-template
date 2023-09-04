@@ -1,0 +1,17 @@
+---
+import "@fontsource/inter";
+import type { Content } from "@withmoons/explorer";
+import BaseLayout from "@withmoons/astro-integration/components/BaseLayout.astro";
+
+type Props = { content?: Content };
+
+const { content } = Astro.props;
+---
+
+<BaseLayout content={content}>
+  <slot name="head" slot="head">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </slot>
+
+  <slot />
+</BaseLayout>

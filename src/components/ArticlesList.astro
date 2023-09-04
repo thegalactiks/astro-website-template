@@ -1,0 +1,25 @@
+---
+import { getPagesPartOf } from "@withmoons/explorer";
+
+const { identifier, class: className } = Astro.props;
+
+const articles = await getPagesPartOf(identifier);
+---
+
+<ul class:list={["grid gap-8", className]}>
+  {
+    articles
+      .sort(
+        (a, b) =>
+          b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
+      )
+      .map((page) => (
+        <li>
+          <a class="flex flex-col space-y-1" href={page.path}>
+            <h3 class="text-lg ld:text-xl tracking-tight">{page.name}</h3>
+            <p class="text-gray-600">{page.description}</p>
+          </a>
+        </li>
+      ))
+  }
+</ul>

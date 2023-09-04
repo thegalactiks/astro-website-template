@@ -1,0 +1,14 @@
+---
+import { type Content, getHomePage } from "@withmoons/astro-integration";
+
+import SimplifiedPageLayout from "@layouts/SimplifiedPageLayout.astro";
+
+type Props = { page: Content };
+
+const page = await getHomePage();
+const { Content } = page.body.render();
+---
+
+<SimplifiedPageLayout content={page}>
+  <Content />
+</SimplifiedPageLayout>

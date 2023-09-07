@@ -1,8 +1,10 @@
 ---
+import { getDefaultLanguage } from "@withmoons/config";
 import type { Content } from "@withmoons/explorer";
 
 import Article from "@components/Article.astro";
 import PageLayout from "./PageLayout.astro";
+import { Image } from "astro:assets";
 
 type Props = { content: Content };
 
@@ -11,29 +13,74 @@ const { content } = Astro.props;
 
 <PageLayout content={content}>
   <div class="mx-auto max-w-3xl mt-16">
-    {
-      content.isPartOf && (
-        <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
-          {content.isPartOf}
-        </span>
-      )
-    }
-    <h1
-      class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-2 lg:leading-tight"
-    >
-      {content.name}
-    </h1>
-    <div class="flex gap-2 mt-3 items-center flex-wrap md:flex-nowrap">
-      <time
-        class="text-gray-500 text-sm"
-        datetime={content.datePublished.toISOString()}
+    <div class="text-center">
+      {
+        content.isPartOf && (
+          <span class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase">
+            {content.isPartOf}
+          </span>
+        )
+      }
+      <h1
+        class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-2 lg:leading-tight"
       >
-        {content.datePublished.toDateString()}
-      </time>
-    </div>
-  </div>
+        {content.name}
+      </h1>
 
-  <Article class="mx-auto mt-6 max-w-3xl">
-    <slot />
-  </Article>
+      <div class="flex justify-center mt-3 space-x-3 text-gray-500">
+        <div class="flex items-center gap-3">
+          <div class="relative flex-shrink-0 w-10 h-10">
+            {
+              content.author?.image && (
+                <Image
+                  src={content.author.image.contentUrl}
+                  alt={content.author.image.description || content.name}
+                  width={80}
+                  height={80}
+                  loading="eager"
+                  class="rounded-full"
+                />
+              )
+            }
+          </div>
+          <div>
+            <p class="text-gray-800">
+              {content.author?.name}
+            </p>
+            <time
+              class="text-gray-500 text-sm"
+              datetime={content.datePublished.toISOString()}
+            >
+              {
+                content.datePublished.toLocaleDateString(
+                  content.inLanguage || getDefaultLanguage(),
+                  { year: "numeric", month: "long", day: "numeric" }
+                )
+              }
+            </time>
+          </div>
+        </div>
+      </div>
+
+      {
+        content.image && (
+          <div class="relative z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
+            <Image
+              src={content.image.contentUrl}
+              sizes="(max-width: 640px) 90vw, 480px"
+              width={1024}
+              height={576}
+              alt={content.image.name || content.name}
+              loading="eager"
+              class="w-full"
+            />
+          </div>
+        )
+      }
+    </div>
+
+    <Article class="mx-auto mt-6 max-w-3xl">
+      <slot />
+    </Article>
+  </div>
 </PageLayout>

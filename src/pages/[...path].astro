@@ -1,5 +1,5 @@
 ---
-import { collectionName, type Content } from "@withmoons/explorer";
+import type { Content } from "@withmoons/explorer";
 
 import ArticleList from "@components/ArticlesList.astro";
 import ArticleLayout from "@layouts/ArticleLayout.astro";
@@ -13,7 +13,7 @@ const { page } = Astro.props;
 const { Content } = page.body.render();
 
 const Layout =
-  page.collection === collectionName.article ? ArticleLayout : SimplifiedPageLayout;
+  page.type === "Article" ? ArticleLayout : SimplifiedPageLayout;
 ---
 
 <Layout content={page}>

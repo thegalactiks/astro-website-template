@@ -1,10 +1,11 @@
 ---
 import { getDefaultLanguage } from "@withmoons/config";
 import type { Content } from "@withmoons/explorer";
+import { Image } from "astro:assets";
 
+import { dynamicViteAssetImport } from "../lib/image.mjs";
 import Article from "@components/Article.astro";
 import PageLayout from "./PageLayout.astro";
-import { Image } from "astro:assets";
 
 type Props = { content: Content };
 
@@ -33,7 +34,7 @@ const { content } = Astro.props;
             {
               content.author?.image && (
                 <Image
-                  src={content.author.image.contentUrl}
+                  src={dynamicViteAssetImport(content.author.image.contentUrl)}
                   alt={content.author.image.description || content.name}
                   width={80}
                   height={80}
@@ -66,7 +67,7 @@ const { content } = Astro.props;
         content.image && (
           <div class="relative z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
             <Image
-              src={content.image.contentUrl}
+              src={dynamicViteAssetImport(content.image.contentUrl)}
               sizes="(max-width: 640px) 90vw, 480px"
               width={1024}
               height={576}

@@ -1,9 +1,11 @@
 ---
-import { getPagesPartOf } from "@galactiks/explorer";
+import { type Content, getPagesPartOf, getPagesWithKeywordIdentifier } from "@galactiks/explorer";
 
-const { identifier, class: className } = Astro.props;
+type Props = Pick<Content, 'identifier' | 'inLanguage' | 'type'> & { class?: string };
 
-const articles = await getPagesPartOf(identifier);
+const { identifier, inLanguage, type, class: className } = Astro.props;
+
+const articles = await (type === 'Tag' ? getPagesWithKeywordIdentifier(identifier, { inLanguage }) : getPagesPartOf(identifier, { inLanguage }));
 ---
 
 <ul class:list={["grid gap-8", className]}>

@@ -12,12 +12,11 @@ type Props = { page: Content };
 const { page } = Astro.props;
 const { Content } = page.body.render();
 
-const Layout =
-  page.type === "Article" ? ArticleLayout : SimplifiedPageLayout;
+const Layout = page.type === "Article" ? ArticleLayout : SimplifiedPageLayout;
 ---
 
 <Layout content={page}>
-  {page.listingPage && <ArticleList identifier={page.identifier} />}
+  {page.listingPage && <ArticleList identifier={page.identifier} inLanguage={page.inLanguage} type={page.type} />}
 
   {Content && <Content />}
 </Layout>

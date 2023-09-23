@@ -6,6 +6,7 @@ import { Image } from "astro:assets";
 import { dynamicViteAssetImport } from "../lib/image.mjs";
 import Article from "@components/Article.astro";
 import PageLayout from "./PageLayout.astro";
+import TagItem from "@components/TagItem.astro";
 
 type Props = { content: Content };
 
@@ -93,7 +94,7 @@ const { content } = Astro.props;
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
           <div class="flex flex-wrap items-center w-full gap-3 md:w-auto">
             {content.keywords.map((keyword) => (
-              <span class="text-sm text-gray-500">#{keyword}</span>
+              <TagItem class="text-sm text-gray-500" keyword={keyword} />
             ))}
           </div>
         )

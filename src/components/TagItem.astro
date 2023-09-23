@@ -1,0 +1,16 @@
+---
+import { getTagPageByKeyword } from "@galactiks/explorer";
+
+const { class: className, keyword } = Astro.props;
+
+const keyworkPages = await getTagPageByKeyword(keyword);
+const page = keyworkPages.length > 0 && keyworkPages[0];
+---
+
+{
+  page ? (
+    <a href={page.url} class={className}>#{page.name}</a>
+  ) : (
+    <span class={className}>#{keyword}</span>
+  )
+}

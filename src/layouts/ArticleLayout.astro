@@ -45,9 +45,15 @@ const { content } = Astro.props;
             }
           </div>
           <div>
-            <p class="text-gray-800">
-              {content.author?.name}
-            </p>
+            {
+              content.author.url ? (
+                <a href={content.author.url} class="block text-gray-800">
+                  {content.author.name}
+                </a>
+              ) : (
+                <p class="text-gray-800">{content.author.name}</p>
+              )
+            }
             <time
               class="text-gray-500 text-sm"
               datetime={content.datePublished.toISOString()}
@@ -82,6 +88,16 @@ const { content } = Astro.props;
 
     <Article class="mx-auto mt-6 max-w-3xl">
       <slot />
+
+      {
+        Array.isArray(content.keywords) && content.keywords.length > 0 && (
+          <div class="flex flex-wrap items-center w-full gap-3 md:w-auto">
+            {content.keywords.map((keyword) => (
+              <span class="text-sm text-gray-500">#{keyword}</span>
+            ))}
+          </div>
+        )
+      }
     </Article>
   </div>
 </PageLayout>

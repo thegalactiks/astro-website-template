@@ -1,11 +1,11 @@
 ---
-import { type Content, getHomePage } from "@galactiks/astro-integration";
+import { type Content, getIndexPage } from "@galactiks/astro-integration";
 
 import PageLayout from "@layouts/PageLayout.astro";
 
 type Props = { page: Content };
 
-const page = await getHomePage();
+const page = await getIndexPage();
 const { Content } = page.body.render();
 ---
 

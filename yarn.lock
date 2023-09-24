@@ -859,37 +859,37 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.8.tgz#61b50cb0eb72b14ae1938d47c4a9a91546d2a50c"
   integrity sha512-28knWH1BfOiRalfLs90U4sge5mpQ8ZH6FS0PTT+IZMKrZ7wNHDHRuKa1kQJg+uHcc6axBppnxll+HXM4c7zo/Q==
 
-"@galactiks/astro-integration@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@galactiks/astro-integration/-/astro-integration-0.2.1.tgz#f54b9f211261b0b60273f9081d2323922c9b7889"
-  integrity sha512-B5Q33RAhaSVcNf7TL0HKD9bAm9jNTumgo08EK/3UY5iatiyKsEVCvKN4zZ30fiNtLjqmzEpqx8YhJWk22RN25Q==
+"@galactiks/astro-integration@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@galactiks/astro-integration/-/astro-integration-0.2.2.tgz#b1c71b1e9eb2dafd18ffc316444d48c548cc540b"
+  integrity sha512-HXzsoh5yzxqJMi4k3Ju5TBJ5JqssM+4FtF5he0Sw+3JcVJ0DU60bFjeiOm5J09BaGIxr/rBUxArVEYtlS3CViQ==
   dependencies:
-    "@galactiks/config" "^0.2.1"
-    "@galactiks/explorer" "^0.2.1"
+    "@galactiks/config" "^0.2.2"
+    "@galactiks/explorer" "^0.2.2"
 
-"@galactiks/config@0.2.1", "@galactiks/config@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@galactiks/config/-/config-0.2.1.tgz#d293f818b3093d75463bd52f90e3d09e903de22d"
-  integrity sha512-rZ0kewlDdhW6kPnBTWa5ONIxocaETYE3CpbMzAcVzZO8WtrMYlErmkm7liMt4wbMljZlBeTScOWaiHz2xXXBtg==
+"@galactiks/config@0.2.2", "@galactiks/config@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@galactiks/config/-/config-0.2.2.tgz#7c86e7d1ccb2e6cedd0f5688513d3c6ca0b02155"
+  integrity sha512-mUyvk6CoYfrt60LT9762xqr36Zcb8BRF/WUeV83Q7kM+a9SBo/yQh/1dJhGocYRWCaVf3a+MlsuUyqezkkOZdA==
   dependencies:
-    "@galactiks/contentlayer" "^0.1.0"
+    "@galactiks/contentlayer" "^0.1.1"
     deepmerge "4.3.1"
     lodash.set "4.3.2"
     zod "3.22.2"
 
-"@galactiks/contentlayer@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@galactiks/contentlayer/-/contentlayer-0.1.0.tgz#4864d6058dbeff2cf075b1e5187b6fd7a8ebd255"
-  integrity sha512-njyCuKTUCMKfOoBoYWLitIJZ6coppatFYjMn9B5FApVt/a1J3xpnb/8y7NQ1h2vsmRX1W4MQgfPzIq/5Jx3joQ==
+"@galactiks/contentlayer@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@galactiks/contentlayer/-/contentlayer-0.1.1.tgz#1191bef0d0cd9b68219d5f2f9b0c303ffae6e4d1"
+  integrity sha512-oAbXXr3zg+7Myelmpnr0jMGPFg6I0e0ORinChQsH7Cg/0RkIRKhrDFIkes68LsNk73TurIWtWg5pWBBWTG0b8Q==
 
-"@galactiks/explorer@0.2.1", "@galactiks/explorer@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@galactiks/explorer/-/explorer-0.2.1.tgz#fe2eceb28a05f743d0b1690cc2a5fe6e334ac6e9"
-  integrity sha512-5Bosoc+UmzpzL+tVRgT7K8+B7Uwm2xCWKx/aYHn/1Fjzx+4dgWcKBxp8I7lh9FhEtNlM1qcNK1umZ1GFb8SI5g==
+"@galactiks/explorer@0.2.2", "@galactiks/explorer@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@galactiks/explorer/-/explorer-0.2.2.tgz#fab0aa5075a865faab7cfce1e22dfbd14b2cb06f"
+  integrity sha512-1OMCU1DnMpw4lw7LvLvyV+S7aYyB+XwkM0et5qbHqJqv63K+ryu9GzLE27EFf8pwJDrQDKoHXGNp7/i3mOL/gQ==
   dependencies:
-    "@galactiks/config" "^0.2.1"
-    "@galactiks/contentlayer" "^0.1.0"
-    "@std-uritemplate/std-uritemplate" "0.0.40"
+    "@galactiks/config" "^0.2.2"
+    "@galactiks/contentlayer" "^0.1.1"
+    "@std-uritemplate/std-uritemplate" "0.0.42"
     esbuild "0.19.3"
     mdx-bundler "9.2.1"
     react "18.2.0"
@@ -1250,10 +1250,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@std-uritemplate/std-uritemplate@0.0.40":
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/@std-uritemplate/std-uritemplate/-/std-uritemplate-0.0.40.tgz#9b04642972c7d29ba32c93fcb38ed04e7c92386a"
-  integrity sha512-I4AsuizKBTk6aD7IOWKW/er6aSb79HBKKtrro6MNTQPAPRn3tdl4YLdWSCT8I5XqZwMuhkAALTp/p9ibGUzJnQ==
+"@std-uritemplate/std-uritemplate@0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@std-uritemplate/std-uritemplate/-/std-uritemplate-0.0.42.tgz#a21c505a665913f4539b0c7f7b564908dbd875f3"
+  integrity sha512-zH+ZOKkGi/79qKOEAEN3JKS+a3+fezsynDH1sdMWan40nw1VYmwTs9xrBk6qt3m6OEu89yi/cJ9sSouoT1UAjQ==
 
 "@tailwindcss/typography@0.5.10":
   version "0.5.10"

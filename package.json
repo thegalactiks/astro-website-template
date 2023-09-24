@@ -19,10 +19,10 @@
     "@astrojs/sitemap": "3.0.0",
     "@astrojs/tailwind": "5.0.0",
     "@fontsource/inter": "5.0.8",
-    "@tailwindcss/typography": "0.5.10",
     "@galactiks/astro-integration": "0.2.1",
     "@galactiks/config": "0.2.1",
     "@galactiks/explorer": "0.2.1",
+    "@tailwindcss/typography": "0.5.10",
     "astro": "3.1.0",
     "astro-critters": "2.0.11",
     "astro-robots-txt": "0.5.0",
@@ -38,6 +38,7 @@
     "eslint-plugin-astro": "0.29.0",
     "eslint-plugin-jsx-a11y": "6.7.1",
     "prettier": "3.0.3",
-    "prettier-plugin-astro": "0.12.0"
+    "prettier-plugin-astro": "0.12.0",
+    "typescript": "5.2.2"
   }
 }

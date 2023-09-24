@@ -47,12 +47,16 @@ const { content } = Astro.props;
           </div>
           <div>
             {
-              content.author.url ? (
-                <a href={content.author.url} class="block text-gray-800">
-                  {content.author.name}
-                </a>
-              ) : (
-                <p class="text-gray-800">{content.author.name}</p>
+              content.author && (
+                <div>
+                  {content.author.url ? (
+                    <a href={content.author.url} class="block text-gray-800">
+                      {content.author.name}
+                    </a>
+                  ) : (
+                    <p class="text-gray-800">{content.author.name}</p>
+                  )}
+                </div>
               )
             }
             <time

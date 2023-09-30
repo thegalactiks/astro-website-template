@@ -1,5 +1,6 @@
 ---
 import type { Content } from "@galactiks/explorer";
+import capitalize from "lodash.capitalize";
 
 import PageLayout from "./PageLayout.astro";
 
@@ -13,7 +14,7 @@ const { content } = Astro.props;
     <h1
       class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight"
     >
-      {content.name}
+      {capitalize(content.name)}
     </h1>
   </div>
 

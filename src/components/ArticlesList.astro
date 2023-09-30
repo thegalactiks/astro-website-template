@@ -1,12 +1,22 @@
 ---
 import { type Content, getPagesPartOf, getPagesWithKeywordIdentifier } from "@galactiks/explorer";
+import capitalize from "lodash.capitalize";
 
-type Props = Pick<Content, 'identifier' | 'inLanguage' | 'type'> & { class?: string };
+type Props = Content & { class?: string };
 
-const { identifier, inLanguage, type, class: className } = Astro.props;
+const { name, identifier, inLanguage, type, class: className } = Astro.props;
 
-const articles = await (type === 'Tag' ? getPagesWithKeywordIdentifier(identifier, { inLanguage }) : getPagesPartOf(identifier, { inLanguage }));
+const inLanguages = inLanguage !== undefined ? [inLanguage] : undefined
+const articles = await (type === 'Tag' ? getPagesWithKeywordIdentifier(identifier, { inLanguages }) : getPagesPartOf(identifier, { inLanguages }));
 ---
+
+<div class="mx-auto max-w-3xl mt-14">
+  <h1
+    class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight"
+  >
+    {capitalize(name)}
+  </h1>
+</div>
 
 <ul class:list={["grid gap-8", className]}>
   {

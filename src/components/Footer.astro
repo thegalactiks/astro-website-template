@@ -1,13 +1,45 @@
 ---
 import { getConfig } from "@galactiks/config";
+import type { Content } from "@galactiks/explorer";
 
 const {
   webManifest: { name },
 } = getConfig();
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
 ---
 
-<footer class="my-20">
+<footer class="my-16 py-4">
   <p class="text-center text-sm text-slate-500">
     {name}
   </p>
+
+  {
+    Array.isArray(content.headers?.alternates) &&
+      content.headers?.alternates.length > 0 && (
+        <ul role="presentation" class="my-4 text-center text-xs text-slate-500">
+          {content.headers?.alternates
+            .filter((alternate) => alternate.hreflang !== "x-default")
+            .map((alternate) => (
+              <li
+                role="presentation"
+                class="inline-block pr-4"
+              >
+                <a
+                  href={alternate.href}
+                  lang={alternate.hreflang}
+                  role="menuitem"
+                  aria-current={
+                    alternate.hreflang === content.inLanguage ? "true" : "false"
+                  }
+                >
+                  {alternate.hreflang}
+                </a>
+              </li>
+            ))}
+        </ul>
+      )
+  }
 </footer>

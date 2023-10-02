@@ -2983,6 +2983,11 @@ find-yarn-workspace-root2@1.2.16:
     micromatch "^4.0.2"
     pkg-dir "^4.2.0"
 
+flag-icons@6.11.1:
+  version "6.11.1"
+  resolved "https://registry.yarnpkg.com/flag-icons/-/flag-icons-6.11.1.tgz#3546cde2a77c6bcdaacb4ca17e176a9964db8ae4"
+  integrity sha512-c2UMJTFZoVQ47/sE1mb+9b5S1pi8SjXsx0MR063O31GV+O2EN4FMwMdEYSQItpien2bl9w1viLUoo2R3r6OK3g==
+
 flat-cache@^3.0.4:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.1.0.tgz#0e54ab4a1a60fe87e2946b6b00657f1c99e1af3f"

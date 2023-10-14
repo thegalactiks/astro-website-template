@@ -18,7 +18,7 @@ const { content } = Astro.props;
 
   {
     Array.isArray(content.headers?.alternates) &&
-      content.headers?.alternates.length > 1 && (
+      content.headers?.alternates.length > 2 && (
         <ul role="presentation" class="my-4 text-center text-xs text-slate-500">
           {content.headers?.alternates
             .filter((alternate) => alternate.hreflang !== "x-default")

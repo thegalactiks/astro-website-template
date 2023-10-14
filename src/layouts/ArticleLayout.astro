@@ -7,6 +7,7 @@ import { dynamicViteAssetImport } from "../lib/image.mjs";
 import Article from "@components/Article.astro";
 import PageLayout from "./PageLayout.astro";
 import TagItem from "@components/TagItem.astro";
+import Time from "@components/Time.astro";
 
 type Props = { content: Content };
 
@@ -16,12 +17,12 @@ const isPartOf =
 ---
 
 <PageLayout content={content}>
-  <div class="mx-auto max-w-3xl mt-16">
+  <div class="mx-auto max-w-4xl mt-16">
     <div class="text-center">
       {
         isPartOf && (
           <a
-            href={isPartOf.url}
+            href={isPartOf.path}
             class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase"
           >
             {isPartOf.name}
@@ -56,17 +57,10 @@ const isPartOf =
                 <span class="block text-gray-800">{content.author.name}</span>
               )
             }
-            <time
+            <Time
               class="text-gray-500 text-sm"
-              datetime={content.datePublished.toISOString()}
-            >
-              {
-                content.datePublished.toLocaleDateString(
-                  content.inLanguage || getDefaultLanguage(),
-                  { year: "numeric", month: "long", day: "numeric" }
-                )
-              }
-            </time>
+              datetime={content.datePublished}
+            />
           </div>
         </div>
       </div>
@@ -88,7 +82,7 @@ const isPartOf =
       }
     </div>
 
-    <Article class="mx-auto mt-8 max-w-3xl">
+    <Article class="mx-auto mt-8 max-w-2xl">
       <slot />
 
       {

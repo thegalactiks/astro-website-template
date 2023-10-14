@@ -1,37 +1,44 @@
 ---
-import { type Content, getPagesPartOf, getPagesWithKeywordIdentifier } from "@galactiks/explorer";
+import {
+  type Content,
+  getPagesPartOf,
+  getPagesWithKeywordIdentifier,
+} from "@galactiks/explorer";
 import capitalize from "lodash.capitalize";
+import ArticleCard from "./ArticleCard.astro";
 
 type Props = Content & { class?: string };
 
 const { name, identifier, inLanguage, type, class: className } = Astro.props;
 
-const inLanguages = inLanguage !== undefined ? [inLanguage] : undefined
-const articles = await (type === 'Tag' ? getPagesWithKeywordIdentifier(identifier, { inLanguages }) : getPagesPartOf(identifier, { inLanguages }));
+const inLanguages = inLanguage !== undefined ? [inLanguage] : undefined;
+const articles = await (type === "Tag"
+  ? getPagesWithKeywordIdentifier(identifier, { inLanguages })
+  : getPagesPartOf(identifier, { inLanguages }));
 ---
 
 <div class="mx-auto max-w-3xl mt-14">
   <h1
-    class="text-4xl lg:text-5xl font-bold lg:tracking-tight mt-1 lg:leading-tight"
+    class="text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug"
   >
     {capitalize(name)}
   </h1>
 </div>
 
-<ul class:list={["grid gap-8", className]}>
+<div
+  class:list={[
+    "mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3",
+    className,
+  ]}
+>
   {
     articles
       .sort(
         (a, b) =>
           b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
       )
-      .map((page) => (
-        <li>
-          <a class="flex flex-col space-y-1" href={page.path}>
-            <h3 class="text-lg ld:text-xl tracking-tight">{page.name}</h3>
-            <p class="text-gray-600">{page.description}</p>
-          </a>
-        </li>
+      .map((article) => (
+        <ArticleCard article={article} />
       ))
   }
-</ul>
+</div>

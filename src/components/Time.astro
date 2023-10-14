@@ -1,0 +1,17 @@
+---
+import { getDefaultLanguage } from '@galactiks/config';
+
+type Props = { class?: string; datetime: Date; inLanguage?: string };
+
+const { class: className, datetime, inLanguage } = Astro.props;
+---
+
+<time class={className} datetime={datetime.toISOString()}>
+  {
+    datetime.toLocaleDateString(inLanguage || getDefaultLanguage(), {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  }
+</time>

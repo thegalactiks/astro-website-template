@@ -1,6 +1,6 @@
 ---
 import { getDefaultLanguage } from "@galactiks/config";
-import type { Content } from "@galactiks/explorer";
+import { type Content, getPageByIdentifier } from "@galactiks/explorer";
 import { Image } from "astro:assets";
 
 import { dynamicViteAssetImport } from "../lib/image.mjs";
@@ -11,16 +11,17 @@ import TagItem from "@components/TagItem.astro";
 type Props = { content: Content };
 
 const { content } = Astro.props;
+const isPartOf = content.isPartOf && await getPageByIdentifier(content.isPartOf)
 ---
 
 <PageLayout content={content}>
   <div class="mx-auto max-w-3xl mt-16">
     <div class="text-center">
       {
-        content.isPartOf && (
-          <span class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase">
-            {content.isPartOf}
-          </span>
+        isPartOf && (
+          <a href={isPartOf.url} class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase">
+            {isPartOf.name}
+          </a>
         )
       }
       <h1

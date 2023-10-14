@@ -11,7 +11,8 @@ import TagItem from "@components/TagItem.astro";
 type Props = { content: Content };
 
 const { content } = Astro.props;
-const isPartOf = content.isPartOf && await getPageByIdentifier(content.isPartOf)
+const isPartOf =
+  content.isPartOf && (await getPageByIdentifier(content.isPartOf));
 ---
 
 <PageLayout content={content}>
@@ -19,7 +20,10 @@ const isPartOf = content.isPartOf && await getPageByIdentifier(content.isPartOf)
     <div class="text-center">
       {
         isPartOf && (
-          <a href={isPartOf.url} class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase">
+          <a
+            href={isPartOf.url}
+            class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase"
+          >
             {isPartOf.name}
           </a>
         )
@@ -49,15 +53,7 @@ const isPartOf = content.isPartOf && await getPageByIdentifier(content.isPartOf)
           <div>
             {
               content.author && (
-                <div>
-                  {content.author.url ? (
-                    <a href={content.author.url} class="block text-gray-800">
-                      {content.author.name}
-                    </a>
-                  ) : (
-                    <p class="text-gray-800">{content.author.name}</p>
-                  )}
-                </div>
+                <span class="block text-gray-800">{content.author.name}</span>
               )
             }
             <time
@@ -92,15 +88,53 @@ const isPartOf = content.isPartOf && await getPageByIdentifier(content.isPartOf)
       }
     </div>
 
-    <Article class="mx-auto mt-6 max-w-3xl">
+    <Article class="mx-auto mt-8 max-w-3xl">
       <slot />
 
       {
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
-          <div class="flex flex-wrap items-center w-full gap-3 md:w-auto">
+          <div class="my-4 flex flex-wrap items-center w-full gap-3 md:w-auto">
             {content.keywords.map((keyword) => (
               <TagItem class="text-sm text-gray-500" keyword={keyword} />
             ))}
+          </div>
+        )
+      }
+
+      {
+        content.author && (
+          <div class="my-4 px-8 py-4 text-gray-500 rounded-2xl bg-gray-50">
+            <div class="flex flex-wrap items-start sm:space-x-6 sm:flex-nowrap">
+              {content.author.image && (
+                <div class="relative flex-shrink-0 w-24 h-24 mt-1">
+                  <a href={content.author.url || "#"}>
+                    <Image
+                      src={dynamicViteAssetImport(
+                        content.author.image.contentUrl
+                      )}
+                      alt={content.name}
+                      width={96}
+                      height={96}
+                      loading="lazy"
+                      class="rounded-full object-cover"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
+                    />
+                  </a>
+                </div>
+              )}
+              <div>
+                <div class="mb-3">
+                  <a href={content.author.url || "#"} class="no-underline">
+                    <h3 class="text-lg font-medium text-gray-800">
+                      {content.author.name}
+                    </h3>
+                  </a>
+                </div>
+                <div>
+                  <p>{content.author.description}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )
       }

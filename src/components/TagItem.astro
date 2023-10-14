@@ -9,8 +9,8 @@ const page = keyworkPages.length > 0 && keyworkPages[0];
 
 {
   page ? (
-    <a href={page.url} class={className}>#{page.name}</a>
+    <a href={page.url} class={className}>#{page.name.toLowerCase()}</a>
   ) : (
-    <span class={className}>#{keyword}</span>
+    <span class={className}>#{keyword.toLowerCase()}</span>
   )
 }

@@ -2,6 +2,6 @@
 const { class: className } = Astro.props;
 ---
 
-<article id="article" class:list={["prose lg:prose-lg", className]}>
+<article id="article" class:list={["prose", className]}>
   <slot />
 </article>

@@ -6,15 +6,15 @@ import Navbar from "@components/Navbar.astro";
 import BaseLayout from "./BaseLayout.astro";
 import Container from "@components/Container.astro";
 
-type Props = { content: Content };
+type Props = { content: Content, class?: string };
 
-const { content } = Astro.props;
+const { content, class: className } = Astro.props;
 ---
 
 <BaseLayout content={content}>
   <Navbar />
 
-  <main>
+  <main class={className}>
     <Container>
       <slot />
     </Container>

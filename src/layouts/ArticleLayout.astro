@@ -1,13 +1,14 @@
 ---
-import { getDefaultLanguage } from "@galactiks/config";
 import { type Content, getPageByIdentifier } from "@galactiks/explorer";
 import { Image } from "astro:assets";
 
-import { dynamicViteAssetImport } from "../lib/image.mjs";
 import Article from "@components/Article.astro";
-import PageLayout from "./PageLayout.astro";
+import Breadcrumb from "@components/Breadcrumb.astro";
 import TagItem from "@components/TagItem.astro";
 import Time from "@components/Time.astro";
+
+import { dynamicViteAssetImport } from "../lib/image.mjs";
+import PageLayout from "./PageLayout.astro";
 
 type Props = { content: Content };
 
@@ -132,6 +133,8 @@ const isPartOf =
           </div>
         )
       }
+
+      <Breadcrumb page={content} />
     </Article>
   </div>
 </PageLayout>

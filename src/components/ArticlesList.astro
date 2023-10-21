@@ -17,13 +17,9 @@ const articles = await (type === "Tag"
   : getPagesPartOf(identifier, { inLanguages }));
 ---
 
-<div class="mx-auto max-w-3xl mt-14">
-  <h1
-    class="text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug"
-  >
-    {capitalize(name)}
-  </h1>
-</div>
+<h1 class="mt-14 text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug">
+  {capitalize(name)}
+</h1>
 
 <div
   class:list={[
@@ -37,8 +33,6 @@ const articles = await (type === "Tag"
         (a, b) =>
           b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
       )
-      .map((article) => (
-        <ArticleCard article={article} />
-      ))
+      .map((article) => <ArticleCard article={article} />)
   }
 </div>

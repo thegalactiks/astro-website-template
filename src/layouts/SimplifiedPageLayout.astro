@@ -9,10 +9,8 @@ type Props = { content: Content };
 const { content } = Astro.props;
 ---
 
-<PageLayout class="mx-auto my-6 max-w-3xl prose" content={content}>
-  <div class="my-6 prose">
-    <slot />
-  </div>
+<PageLayout class="my-6 prose" content={content}>
+  <slot />
 
   <Breadcrumb page={content} class="mt-6" />
 </PageLayout>

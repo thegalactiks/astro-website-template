@@ -14,8 +14,8 @@ const { content, class: className } = Astro.props;
 <BaseLayout content={content}>
   <Navbar />
 
-  <main class={className}>
-    <Container>
+  <main>
+    <Container class={className}>
       <slot />
     </Container>
   </main>

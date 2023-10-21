@@ -83,7 +83,7 @@ const isPartOf =
       }
     </div>
 
-    <Article class="mx-auto mt-8 max-w-2xl">
+    <Article class="mx-auto mt-8 max-w-3xl">
       <slot />
 
       {
@@ -133,8 +133,8 @@ const isPartOf =
           </div>
         )
       }
-
-      <Breadcrumb page={content} />
     </Article>
+
+    <Breadcrumb page={content} />
   </div>
 </PageLayout>

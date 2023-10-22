@@ -12,7 +12,7 @@ const { content, class: className } = Astro.props;
 ---
 
 <BaseLayout content={content}>
-  <Navbar />
+  <Navbar inLanguage={content.inLanguage} />
 
   <main>
     <Container class={className}>

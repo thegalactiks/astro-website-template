@@ -5,8 +5,11 @@ import { getDefaultLanguage } from "@galactiks/config";
 import Container from "@components/Container.astro";
 import Logo from "@components/Logo.astro";
 
+type Props = { inLanguage?: string };
+const { inLanguage } = Astro.props;
+
 const navigationElement = await getSiteNavigationElement({
-  inLanguage: getDefaultLanguage(),
+  inLanguage: inLanguage || getDefaultLanguage(),
 });
 ---
 

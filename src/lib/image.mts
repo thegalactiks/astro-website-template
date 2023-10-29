@@ -9,7 +9,6 @@ export function dynamicViteAssetImport(filePath: string) {
     case ".jpg":
       return import(`../assets/${name}.jpg`);
     case ".png":
-      console.log("png");
       return import(`../assets/${name}.png`);
     case ".svg":
       return import(`../assets/${name}.svg`);

@@ -865,13 +865,13 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.15.tgz#c01d160cd02bde1a4ce09f2c38b2063b66caf870"
   integrity sha512-/IoWYEXl8lqJEx50JqNPT+bI4VNwxb/bg2oOfvG8PiEsDsmHRFvWBVHlohBNn1+QdBf+KbAjU/gb4vlGOSsVWw==
 
-"@galactiks/astro-integration@0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@galactiks/astro-integration/-/astro-integration-0.2.6.tgz#c139e612eb880c7de5014935a2440df851081113"
-  integrity sha512-J7VWdiRtp6vc5yHeps5ugXB8710TkoEIchRvGf7x+xH4c9XVs0JqK+lYrDUvo7ke/S3WZ9ZpCIdHaRV2ob230Q==
+"@galactiks/astro-integration@0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@galactiks/astro-integration/-/astro-integration-0.2.7.tgz#b433eeafebcff61d872c9f8544a724631121b291"
+  integrity sha512-BoK5V9zU7yu/5qcTTzLORiAnhbxX3cEDuJaUOaaokfnCCTJpO77eHMM7vqXdzLxmyrVjEA3tCHs0Ft3ijL+MTQ==
   dependencies:
     "@galactiks/config" "^0.2.6"
-    "@galactiks/explorer" "^0.2.6"
+    "@galactiks/explorer" "^0.2.7"
     date-fns "2.30.0"
 
 "@galactiks/config@0.2.6", "@galactiks/config@^0.2.6":
@@ -883,18 +883,18 @@
     lodash.set "4.3.2"
     zod "3.22.4"
 
-"@galactiks/contentlayer@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@galactiks/contentlayer/-/contentlayer-0.1.5.tgz#7d5e904b4b0961e6d982925b1ba1c8608cd9c507"
-  integrity sha512-irMUcpVHkaaTl/DtSFVW4DYJm21wV8pO8bCDWR6kCsRX06l8KszWckxUypW2UKhn9g3XN4xpuxRLwfOaTtisxw==
+"@galactiks/contentlayer@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@galactiks/contentlayer/-/contentlayer-0.1.6.tgz#58a3f4c1c8a515bb864dd8a25ef35851b2b1c0b7"
+  integrity sha512-to9mSJc1+2Zx7Dy8+tT+PJ8EtzcuoGnAdvahVROuK0izO/+CjCkHy4iX4Ew0H2UsfsMiCVXn5Vpz8UkEeWrfkA==
 
-"@galactiks/explorer@0.2.6", "@galactiks/explorer@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@galactiks/explorer/-/explorer-0.2.6.tgz#19df06629e6b4249dcdc26bb36b4453d64305150"
-  integrity sha512-WDr8C6lOzXXiT9A0oh6s7feedmBmbcE7Ve1o3gwVr0DvVqJbGmfqh9JtTjJgN01xVwXqNwhRfagFOKR0V+aLjA==
+"@galactiks/explorer@0.2.7", "@galactiks/explorer@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@galactiks/explorer/-/explorer-0.2.7.tgz#2423795c3aece33538ea83605a665b7b8a85c1e5"
+  integrity sha512-+umFMXjkSDUIh2FrjIZ3UTxrt0EPs9jYoDIo0noJGKC2RsjhrRDU8IJ2PVxPgSueV/ynSr7Zcueu2hiqMMS7ZA==
   dependencies:
     "@galactiks/config" "^0.2.6"
-    "@galactiks/contentlayer" "^0.1.5"
+    "@galactiks/contentlayer" "^0.1.6"
     "@std-uritemplate/std-uritemplate" "0.0.46"
     esbuild "0.19.5"
     mdx-bundler "9.2.1"

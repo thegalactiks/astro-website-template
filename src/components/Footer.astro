@@ -1,32 +1,47 @@
 ---
-import { getConfig } from "@galactiks/config";
-import type { Content } from "@galactiks/explorer";
+import { getConfig, getDefaultLanguage } from "@galactiks/config";
+import { type Content, getWebPageFooter } from "@galactiks/explorer";
 
 const {
   webManifest: { name },
 } = getConfig();
 
 type Props = { content: Content };
-
 const { content } = Astro.props;
+
+const footerElement = await getWebPageFooter({
+  inLanguage: content.inLanguage || getDefaultLanguage(),
+});
 ---
 
-<footer class="my-16 py-4">
-  <p class="text-center text-sm text-slate-500">
-    {name}
-  </p>
+<footer class="mt-8 py-6">
+  {
+    typeof footerElement === "object" &&
+      Array.isArray(footerElement.itemListElement) &&
+      footerElement.itemListElement.length > 0 && (
+        <ul role="presentation" class="py-4 text-center text-sm text-gray-600">
+          {footerElement.itemListElement.map(({ path, url, name }, i) => (
+            <li key={`footer-navigation-${i}`} class="inline-block">
+              <a
+                href={path || url}
+                class="flex lg:px-3 py-2 hover:text-primary"
+              >
+                {name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+  }
 
   {
     Array.isArray(content.headers?.alternates) &&
       content.headers?.alternates.length > 2 && (
-        <ul role="presentation" class="my-4 text-center text-xs text-slate-500">
+        <ul role="presentation" class="py-4 text-center text-xs text-slate-500">
           {content.headers?.alternates
             .filter((alternate) => alternate.hreflang !== "x-default")
-            .map((alternate) => (
-              <li
-                role="presentation"
-                class="inline-block pr-4"
-              >
+            .map((alternate, i) => (
+              <li key={`locale-alternate-${i}`} role="presentation" class="inline-block pr-4">
                 <a
                   href={alternate.href}
                   lang={alternate.hreflang}
@@ -42,4 +57,8 @@ const { content } = Astro.props;
         </ul>
       )
   }
+
+  <p class="pt-2 text-center text-sm text-slate-500">
+    {name}
+  </p>
 </footer>

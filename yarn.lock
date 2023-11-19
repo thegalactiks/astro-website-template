@@ -3056,10 +3056,10 @@ find-yarn-workspace-root2@1.2.16:
     micromatch "^4.0.2"
     pkg-dir "^4.2.0"
 
-flag-icons@6.15.0:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/flag-icons/-/flag-icons-6.15.0.tgz#9b9ea631f408ff41844872d1d7df9bd020d4c76d"
-  integrity sha512-ARo9Q+aATZEjyjveeec9e+orx+xLWUBdOX9baOKoGqDzMbvZ65ghPhaHbVt5T7ZB+Q4OFsB4Hr+eQnpV8Q+dLA==
+flag-icons@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/flag-icons/-/flag-icons-7.0.0.tgz#5abf627c6efa26f8259b43ec620b48e1d8f64305"
+  integrity sha512-U8nkYAJUHDro4SiKjJgnVJnAr6yMHWG7k6+FnV73dnWf/HkQXOZLxkie8qd4ZWR83+L6hQITEWJYgApN4sfUZA==
 
 flat-cache@^3.0.4:
   version "3.1.0"

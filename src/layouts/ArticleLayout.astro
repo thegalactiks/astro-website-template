@@ -89,7 +89,7 @@ const isPartOf =
       {
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
           <div class="my-4 flex flex-wrap items-center w-full gap-3 md:w-auto">
-            {content.keywords.map((keyword) => (
+            {content.keywords.slice(0, 3).map((keyword) => (
               <TagItem class="text-sm text-gray-500" keyword={keyword} />
             ))}
           </div>

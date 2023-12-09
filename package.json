@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "@astrojs/partytown": "2.0.2",
-    "@astrojs/react": "3.0.6",
+    "@astrojs/react": "3.0.7",
     "@astrojs/rss": "3.0.0",
     "@astrojs/sitemap": "3.0.3",
-    "@astrojs/tailwind": "5.0.2",
-    "@fontsource/inter": "5.0.15",
+    "@astrojs/tailwind": "5.0.3",
+    "@fontsource/inter": "5.0.16",
     "@galactiks/astro-integration": "0.2.11",
     "@galactiks/config": "0.2.7",
     "@galactiks/explorer": "0.2.10",
@@ -26,21 +26,21 @@
     "astro-critters": "2.0.11",
     "astro-robots-txt": "1.0.0",
     "contentlayer": "0.3.4",
-    "flag-icons": "7.0.2",
+    "flag-icons": "7.0.3",
     "lodash.capitalize": "4.2.1",
     "mdx-bundler": "9.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.5"
+    "tailwindcss": "3.3.6"
   },
   "devDependencies": {
     "@types/lodash.capitalize": "4.2.9",
-    "@typescript-eslint/parser": "6.13.1",
+    "@typescript-eslint/parser": "6.13.2",
     "eslint": "8.55.0",
     "eslint-plugin-astro": "0.30.0",
     "eslint-plugin-jsx-a11y": "6.8.0",
     "prettier": "3.1.0",
     "prettier-plugin-astro": "0.12.2",
-    "typescript": "5.3.2"
+    "typescript": "5.3.3"
   }
 }

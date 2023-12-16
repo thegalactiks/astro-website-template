@@ -22,7 +22,7 @@
     "@galactiks/config": "0.2.7",
     "@galactiks/explorer": "0.2.10",
     "@tailwindcss/typography": "0.5.10",
-    "astro": "3.6.4",
+    "astro": "4.0.5",
     "astro-critters": "2.0.11",
     "astro-robots-txt": "1.0.0",
     "contentlayer": "0.3.4",

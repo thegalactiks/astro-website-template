@@ -26,7 +26,7 @@
     "astro-critters": "2.0.11",
     "astro-robots-txt": "1.0.0",
     "contentlayer": "0.3.4",
-    "flag-icons": "7.0.3",
+    "flag-icons": "7.1.0",
     "lodash.capitalize": "4.2.1",
     "mdx-bundler": "9.2.1",
     "react": "18.2.0",
@@ -35,11 +35,11 @@
   },
   "devDependencies": {
     "@types/lodash.capitalize": "4.2.9",
-    "@typescript-eslint/parser": "6.13.2",
-    "eslint": "8.55.0",
-    "eslint-plugin-astro": "0.30.0",
+    "@typescript-eslint/parser": "6.14.0",
+    "eslint": "8.56.0",
+    "eslint-plugin-astro": "0.31.0",
     "eslint-plugin-jsx-a11y": "6.8.0",
-    "prettier": "3.1.0",
+    "prettier": "3.1.1",
     "prettier-plugin-astro": "0.12.2",
     "typescript": "5.3.3"
   }

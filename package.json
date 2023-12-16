@@ -14,7 +14,7 @@
   "dependencies": {
     "@astrojs/partytown": "2.0.2",
     "@astrojs/react": "3.0.7",
-    "@astrojs/rss": "3.0.0",
+    "@astrojs/rss": "4.0.1",
     "@astrojs/sitemap": "3.0.3",
     "@astrojs/tailwind": "5.0.3",
     "@fontsource/inter": "5.0.16",

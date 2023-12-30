@@ -13,16 +13,16 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/partytown": "2.0.2",
-    "@astrojs/react": "3.0.8",
-    "@astrojs/sitemap": "3.0.3",
-    "@astrojs/tailwind": "5.0.4",
+    "@astrojs/partytown": "2.0.3",
+    "@astrojs/react": "3.0.9",
+    "@astrojs/sitemap": "3.0.4",
+    "@astrojs/tailwind": "5.1.0",
     "@fontsource/inter": "5.0.16",
     "@galactiks/astro-integration": "0.2.12",
     "@galactiks/config": "0.2.8",
     "@galactiks/explorer": "0.2.11",
     "@tailwindcss/typography": "0.5.10",
-    "astro": "4.0.7",
+    "astro": "4.0.8",
     "astro-critters": "2.0.11",
     "astro-robots-txt": "1.0.0",
     "contentlayer": "0.3.4",
@@ -35,12 +35,12 @@
   },
   "devDependencies": {
     "@types/lodash.capitalize": "4.2.9",
-    "@typescript-eslint/parser": "6.15.0",
+    "@typescript-eslint/parser": "6.16.0",
     "eslint": "8.56.0",
     "eslint-plugin-astro": "0.31.0",
     "eslint-plugin-jsx-a11y": "6.8.0",
     "prettier": "3.1.1",
-    "prettier-plugin-astro": "0.12.2",
+    "prettier-plugin-astro": "0.12.3",
     "typescript": "5.3.3"
   }
 }

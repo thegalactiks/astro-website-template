@@ -1,6 +1,7 @@
 ---
 import { getConfig, getDefaultLanguage } from "@galactiks/config";
 import { type Content, getWebPageFooter } from "@galactiks/explorer";
+import LanguageSelector from "./LanguageSelector.astro";
 
 const {
   webManifest: { name },
@@ -34,29 +35,12 @@ const footerElement = await getWebPageFooter({
       )
   }
 
-  {
-    Array.isArray(content.headers?.alternates) &&
-      content.headers?.alternates.length > 2 && (
-        <ul role="presentation" class="py-4 text-center text-xs text-slate-500">
-          {content.headers?.alternates
-            .filter((alternate) => alternate.hreflang !== "x-default")
-            .map((alternate, i) => (
-              <li key={`locale-alternate-${i}`} role="presentation" class="inline-block pr-4">
-                <a
-                  href={alternate.href}
-                  lang={alternate.hreflang}
-                  role="menuitem"
-                  aria-current={
-                    alternate.hreflang === content.inLanguage ? "true" : "false"
-                  }
-                >
-                  {alternate.hreflang}
-                </a>
-              </li>
-            ))}
-        </ul>
-      )
-  }
+  <div class="flex justify-center">
+    <LanguageSelector
+      currentLang={content.inLanguage}
+      languages={content.headers?.alternates}
+    />
+  </div>
 
   <p class="pt-2 text-center text-sm text-slate-500">
     {name}

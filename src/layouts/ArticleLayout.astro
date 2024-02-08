@@ -24,20 +24,20 @@ const isPartOf =
         isPartOf && (
           <a
             href={isPartOf.path}
-            class="text-blue-400 inline-block mt-5 text-xs font-medium tracking-wider uppercase"
+            class="text-primary inline-block text-xs font-medium tracking-wider uppercase"
           >
             {isPartOf.name}
           </a>
         )
       }
       <h1
-        class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-2 lg:leading-tight"
+        class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-5 lg:leading-tight"
       >
         {content.name}
       </h1>
 
       <div class="flex justify-center mt-3 space-x-3 text-gray-500">
-        <div class="flex items-center gap-3">
+        <div class="flex items-center">
           <div class="relative flex-shrink-0 w-10 h-10">
             {
               content.author?.image && (
@@ -52,23 +52,17 @@ const isPartOf =
               )
             }
           </div>
-          <div>
-            {
-              content.author && (
-                <span class="block text-gray-800">{content.author.name}</span>
-              )
-            }
-            <Time
-              class="text-gray-500 text-sm"
-              datetime={content.datePublished}
-            />
-          </div>
+          <Time
+            class="text-gray-500"
+            inLanguage={content.inLanguage}
+            datetime={content.datePublished}
+          />
         </div>
       </div>
 
       {
         content.image && (
-          <div class="relative z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
+          <div class="relative my-6 z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
             <Image
               src={dynamicViteAssetImport(content.image.contentUrl)}
               sizes="(max-width: 640px) 90vw, 480px"
@@ -83,13 +77,13 @@ const isPartOf =
       }
     </div>
 
-    <Article class="mx-auto mt-8 max-w-3xl">
+    <Article class="mx-auto mt-12 max-w-3xl">
       <slot />
 
       {
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
           <div class="my-4 flex flex-wrap items-center w-full gap-3 md:w-auto">
-            {content.keywords.slice(0, 3).map((keyword) => (
+            {content.keywords.map((keyword) => (
               <TagItem class="text-sm text-gray-500" keyword={keyword} />
             ))}
           </div>
@@ -98,32 +92,28 @@ const isPartOf =
 
       {
         content.author && (
-          <div class="my-4 px-8 py-4 text-gray-500 rounded-2xl bg-gray-50">
+          <div class="my-6 px-8 py-4 text-gray-500 rounded-2xl bg-gray-50">
             <div class="flex flex-wrap items-start sm:space-x-6 sm:flex-nowrap">
               {content.author.image && (
                 <div class="relative flex-shrink-0 w-24 h-24 mt-1">
-                  <a href={content.author.url || "#"}>
-                    <Image
-                      src={dynamicViteAssetImport(
-                        content.author.image.contentUrl
-                      )}
-                      alt={content.name}
-                      width={96}
-                      height={96}
-                      loading="lazy"
-                      class="rounded-full object-cover"
-                      style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                    />
-                  </a>
+                  <Image
+                    src={dynamicViteAssetImport(
+                      content.author.image.contentUrl
+                    )}
+                    alt={content.name}
+                    width={96}
+                    height={96}
+                    loading="lazy"
+                    class="rounded-full object-cover"
+                    style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
+                  />
                 </div>
               )}
               <div>
                 <div class="mb-3">
-                  <a href={content.author.url || "#"} class="no-underline">
-                    <h3 class="text-lg font-medium text-gray-800">
-                      {content.author.name}
-                    </h3>
-                  </a>
+                  <h3 class="text-lg font-medium text-gray-800">
+                    {content.author.name}
+                  </h3>
                 </div>
                 <div>
                   <p>{content.author.description}</p>

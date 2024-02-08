@@ -1,7 +1,11 @@
 ---
 import { getDefaultLanguage } from '@galactiks/config';
 
-type Props = { class?: string; datetime: Date; inLanguage?: string };
+type Props = {
+  class?: string;
+  datetime: Date;
+  inLanguage?: string
+};
 
 const { class: className, datetime, inLanguage } = Astro.props;
 ---

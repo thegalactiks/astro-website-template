@@ -1,7 +1,7 @@
 ---
 import {
   type Content,
-  getPagesPartOf,
+  getPagesPartOfRecursively,
   getPagesWithKeywordIdentifier,
 } from "@galactiks/explorer";
 import capitalize from "lodash.capitalize";
@@ -14,7 +14,7 @@ const { name, identifier, inLanguage, type, class: className } = Astro.props;
 const inLanguages = inLanguage !== undefined ? [inLanguage] : undefined;
 const articles = await (type === "Tag"
   ? getPagesWithKeywordIdentifier(identifier, { inLanguages })
-  : getPagesPartOf(identifier, { inLanguages }));
+  : getPagesPartOfRecursively(identifier, { inLanguages }));
 ---
 
 <h1 class="mt-14 text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug">
@@ -29,6 +29,7 @@ const articles = await (type === "Tag"
 >
   {
     articles
+      .filter(page => !page.listingPage)
       .sort(
         (a, b) =>
           b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()

@@ -1,9 +1,14 @@
 ---
 import { getTagPageByKeyword } from "@galactiks/explorer";
 
-const { class: className, keyword } = Astro.props;
+type Props = {
+  class: string;
+  keyword: string;
+  inLanguage?: string;
+}
+const { class: className, keyword, inLanguage } = Astro.props;
 
-const keyworkPages = await getTagPageByKeyword(keyword);
+const keyworkPages = await getTagPageByKeyword(keyword, { inLanguage });
 const page = keyworkPages.length > 0 && keyworkPages[0];
 ---
 

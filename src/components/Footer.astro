@@ -35,12 +35,16 @@ const footerElement = await getWebPageFooter({
       )
   }
 
-  <div class="flex justify-center">
-    <LanguageSelector
-      currentLang={content.inLanguage}
-      languages={content.headers?.alternates}
-    />
-  </div>
+  {
+    Array.isArray(content.headers?.alternates) && content.headers?.alternates?.length > 2 && (
+      <div class="flex justify-center">
+        <LanguageSelector
+          currentLang={content.inLanguage}
+          languages={content.headers?.alternates}
+        />
+      </div>
+    )
+  }
 
   <p class="pt-2 text-center text-sm text-slate-500">
     {name}

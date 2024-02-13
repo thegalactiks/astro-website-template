@@ -1,8 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import { getPageByIdentifier, type Article } from "@galactiks/explorer";
 
 import { dynamicViteAssetImport } from "@lib/image.mjs";
+import Picture from "./Picture.astro"
 import Time from "./Time.astro";
 
 type Props = { class?: string; article: Article };
@@ -20,13 +20,12 @@ const isPartOf =
           class="relative block aspect-square"
           href={article.path || article.url}
         >
-          <Image
+          <Picture
             src={dynamicViteAssetImport(article.image.contentUrl)}
             sizes="(max-width: 768px) 30vw, 33vw"
             width={1024}
             height={576}
             alt={article.image.name || article.name}
-            loading="lazy"
             class="object-cover transition-all"
           />
         </a>
@@ -58,14 +57,13 @@ const isPartOf =
               <>
                 {article.author?.image && (
                   <div class="relative h-5 w-5 flex-shrink-0">
-                    <Image
+                    <Picture
                       src={dynamicViteAssetImport(
                         article.author.image.contentUrl
                       )}
                       alt={article.author.image.description || article.name}
                       width={20}
                       height={20}
-                      loading="lazy"
                       class="rounded-full"
                     />
                   </div>
@@ -75,7 +73,11 @@ const isPartOf =
               </>
             )
           }
-          <Time class="truncate text-sm" inLanguage={article.inLanguage} datetime={article.datePublished} />
+          <Time
+            class="truncate text-sm"
+            inLanguage={article.inLanguage}
+            datetime={article.datePublished}
+          />
         </div>
       </div>
     </div>

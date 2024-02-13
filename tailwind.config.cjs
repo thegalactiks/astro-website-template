@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         primary: getConfig().webManifest.theme_color,
-        'primary-background': getConfig().webManifest.background_color,
+        "primary-background": getConfig().webManifest.background_color,
       },
 
       fontFamily: {

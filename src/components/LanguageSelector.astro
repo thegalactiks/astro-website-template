@@ -39,7 +39,6 @@ const languageNames = new Intl.DisplayNames([currentLang], {
   <ul
     id="language-menu"
     class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-    aria-expanded="true"
     role="menu"
     aria-orientation="vertical"
     aria-labelledby="menu-button"
@@ -48,7 +47,8 @@ const languageNames = new Intl.DisplayNames([currentLang], {
     {
       languages
         .filter((alternate) => alternate.hreflang !== "x-default")
-        .map(({ href, hreflang }, i) => (
+        .sort((a, b) => a.hreflang.localeCompare(b.hreflang))
+        .map(({ href, hreflang }) => (
           <li lang={hreflang} role="menuitem" tabindex="-1">
             <a
               class="text-gray-700 hover:text-gray-900 hover:bg-gray-100 block px-4 py-2 text-sm"
@@ -62,7 +62,6 @@ const languageNames = new Intl.DisplayNames([currentLang], {
     }
   </ul>
 </div>
-)
 
 <script>
   const button = document.querySelector("button#language-selector-menu");

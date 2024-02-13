@@ -1,0 +1,10 @@
+---
+import type { ComponentProps } from 'astro/types';
+import { Picture as AstroPicture } from 'astro:assets';
+
+type Props = ComponentProps<typeof AstroPicture>;
+
+const { formats = ["avif", "webp"], ...props } = Astro.props;
+---
+
+<AstroPicture formats={formats} {...props} />

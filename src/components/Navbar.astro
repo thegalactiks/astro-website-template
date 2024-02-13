@@ -1,6 +1,6 @@
 ---
-import { getSiteNavigationElement } from "@galactiks/explorer";
 import { getDefaultLanguage } from "@galactiks/config";
+import { getHomePage, getSiteNavigationElement } from "@galactiks/explorer";
 
 import Container from "@components/Container.astro";
 import Logo from "@components/Logo.astro";
@@ -8,32 +8,42 @@ import Logo from "@components/Logo.astro";
 type Props = { inLanguage?: string };
 const { inLanguage } = Astro.props;
 
+const inLanguageOrDefault = inLanguage || getDefaultLanguage();
+
 const navigationElement = await getSiteNavigationElement({
-  inLanguage: inLanguage || getDefaultLanguage(),
+  inLanguage: inLanguageOrDefault,
 });
+const homepage = await getHomePage({ inLanguage: inLanguageOrDefault });
 ---
 
 <Container>
   <header
     class="primary flex flex-col lg:flex-row justify-between items-center my-5"
   >
-    <div class="flex w-full lg:w-auto items-center justify-between">
-      <Logo />
-    </div>
+    {
+      typeof homepage === "object" ? (
+        <a href={homepage.path} class="flex w-full lg:w-auto items-center justify-between">
+          <Logo />
+        </a>
+      ) : (
+        <div class="flex w-full lg:w-auto items-center justify-between">
+          <Logo />
+        </div>
+      )
+    }
 
     {
-      typeof navigationElement === "object" &&
-        Array.isArray(navigationElement.itemListElement) &&
+      Array.isArray(navigationElement?.itemListElement) &&
         navigationElement.itemListElement.length > 0 && (
           <nav class="w-full lg:w-auto mt-2 lg:flex lg:mt-0 hidden">
             <ul class="flex flex-col lg:flex-row lg:gap-3">
-              {navigationElement.itemListElement.map(({ path, url, name }) => (
+              {navigationElement.itemListElement.map((element) => (
                 <li>
                   <a
-                    href={path || url}
+                    href={element.path || element.url}
                     class="flex lg:px-3 py-2 text-gray-600 hover:text-primary"
                   >
-                    {name}
+                    {element.name}
                   </a>
                 </li>
               ))}

@@ -21,8 +21,8 @@ const footerElement = await getWebPageFooter({
       Array.isArray(footerElement.itemListElement) &&
       footerElement.itemListElement.length > 0 && (
         <ul role="presentation" class="py-4 text-center text-sm text-gray-600">
-          {footerElement.itemListElement.map(({ path, url, name }, i) => (
-            <li key={`footer-navigation-${i}`} class="inline-block">
+          {footerElement.itemListElement.map(({ path, url, name }) => (
+            <li class="inline-block">
               <a
                 href={path || url}
                 class="flex lg:px-3 py-2 hover:text-primary"
@@ -36,14 +36,15 @@ const footerElement = await getWebPageFooter({
   }
 
   {
-    Array.isArray(content.headers?.alternates) && content.headers?.alternates?.length > 2 && (
-      <div class="flex justify-center">
-        <LanguageSelector
-          currentLang={content.inLanguage}
-          languages={content.headers?.alternates}
-        />
-      </div>
-    )
+    Array.isArray(content.headers?.alternates) &&
+      content.headers?.alternates?.length > 2 && (
+        <div class="flex justify-center">
+          <LanguageSelector
+            currentLang={content.inLanguage}
+            languages={content.headers?.alternates}
+          />
+        </div>
+      )
   }
 
   <p class="pt-2 text-center text-sm text-slate-500">

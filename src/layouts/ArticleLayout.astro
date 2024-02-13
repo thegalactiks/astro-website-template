@@ -1,9 +1,9 @@
 ---
 import { type Content, getPageByIdentifier } from "@galactiks/explorer";
-import { Image } from "astro:assets";
 
 import Article from "@components/Article.astro";
 import Breadcrumb from "@components/Breadcrumb.astro";
+import Picture from "@components/Picture.astro"
 import TagItem from "@components/TagItem.astro";
 import Time from "@components/Time.astro";
 
@@ -41,12 +41,11 @@ const isPartOf =
           <div class="relative flex-shrink-0 w-10 h-10">
             {
               content.author?.image && (
-                <Image
+                <Picture
                   src={dynamicViteAssetImport(content.author.image.contentUrl)}
                   alt={content.author.image.description || content.name}
                   width={80}
                   height={80}
-                  loading="eager"
                   class="rounded-full"
                 />
               )
@@ -63,13 +62,12 @@ const isPartOf =
       {
         content.image && (
           <div class="relative my-6 z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
-            <Image
+            <Picture
               src={dynamicViteAssetImport(content.image.contentUrl)}
               sizes="(max-width: 640px) 90vw, 480px"
               width={1024}
               height={576}
               alt={content.image.name || content.name}
-              loading="eager"
               class="w-full"
             />
           </div>
@@ -84,7 +82,11 @@ const isPartOf =
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
           <div class="my-4 flex flex-wrap items-center w-full gap-3 md:w-auto">
             {content.keywords.map((keyword) => (
-              <TagItem class="text-sm text-gray-500" keyword={keyword} inLanguage={content.inLanguage} />
+              <TagItem
+                class="text-sm text-gray-500"
+                keyword={keyword}
+                inLanguage={content.inLanguage}
+              />
             ))}
           </div>
         )
@@ -96,14 +98,13 @@ const isPartOf =
             <div class="flex flex-wrap items-start sm:space-x-6 sm:flex-nowrap">
               {content.author.image && (
                 <div class="relative flex-shrink-0 w-24 h-24 mt-1">
-                  <Image
+                  <Picture
                     src={dynamicViteAssetImport(
                       content.author.image.contentUrl
                     )}
                     alt={content.name}
                     width={96}
                     height={96}
-                    loading="lazy"
                     class="rounded-full object-cover"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
                   />

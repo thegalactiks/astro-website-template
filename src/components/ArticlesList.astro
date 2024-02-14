@@ -31,8 +31,9 @@ const articles = await (type === "Tag"
     articles
       .filter(page => !page.listingPage)
       .sort(
-        (a, b) =>
-          b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
+        (a, b) => (a.position && b.position)
+          ? a.position - b.position
+          : b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds() 
       )
       .map((article) => <ArticleCard article={article} />)
   }

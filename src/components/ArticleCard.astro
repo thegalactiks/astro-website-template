@@ -22,9 +22,7 @@ const isPartOf =
         >
           <Picture
             src={dynamicViteAssetImport(article.image.contentUrl)}
-            sizes="(max-width: 768px) 30vw, 33vw"
-            width={1024}
-            height={576}
+            widths={[100, 300, 500]}
             alt={article.image.name || article.name}
             class="object-cover transition-all"
           />
@@ -62,8 +60,7 @@ const isPartOf =
                         article.author.image.contentUrl
                       )}
                       alt={article.author.image.description || article.name}
-                      width={20}
-                      height={20}
+                      widths={[20, 50]}
                       class="rounded-full"
                     />
                   </div>

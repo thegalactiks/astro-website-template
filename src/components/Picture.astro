@@ -1,10 +1,16 @@
 ---
-import type { ComponentProps } from 'astro/types';
-import { Picture as AstroPicture } from 'astro:assets';
+import type { ComponentProps } from "astro/types";
+import { Picture as AstroPicture } from "astro:assets";
 
 type Props = ComponentProps<typeof AstroPicture>;
 
-const { formats = ["avif", "webp"], ...props } = Astro.props;
+const {
+  formats = ["avif", "webp"],
+  widths = [
+    200, 450, 900, 1250
+  ],
+  ...props
+} = Astro.props;
 ---
 
-<AstroPicture formats={formats} {...props} />
+<AstroPicture widths={widths} formats={formats} inferSize {...props} />

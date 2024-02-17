@@ -53,8 +53,7 @@ const nextArticle = await getNextWorkSeries(content);
                 <Picture
                   src={dynamicViteAssetImport(content.author.image.contentUrl)}
                   alt={content.author.image.description || content.name}
-                  width={80}
-                  height={80}
+                  widths={[20, 50]}
                   class="rounded-full"
                 />
               )
@@ -73,9 +72,7 @@ const nextArticle = await getNextWorkSeries(content);
           <div class="relative my-6 z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
             <Picture
               src={dynamicViteAssetImport(content.image.contentUrl)}
-              sizes="(max-width: 640px) 90vw, 480px"
-              width={1024}
-              height={576}
+              widths={[300, 600, 900, 1200]}
               alt={content.image.name || content.name}
               class="w-full"
             />
@@ -112,8 +109,7 @@ const nextArticle = await getNextWorkSeries(content);
                       content.author.image.contentUrl
                     )}
                     alt={content.name}
-                    width={96}
-                    height={96}
+                    widths={[100, 200]}
                     class="rounded-full object-cover"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
                   />

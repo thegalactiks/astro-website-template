@@ -6,11 +6,16 @@ type Props = ComponentProps<typeof AstroPicture>;
 
 const {
   formats = ["avif", "webp"],
-  widths = [
-    200, 450, 900, 1250
-  ],
+  quality = "mid",
+  widths = [200, 450, 900, 1250],
   ...props
 } = Astro.props;
 ---
 
-<AstroPicture widths={widths} formats={formats} inferSize {...props} />
+<AstroPicture
+  widths={widths}
+  formats={formats}
+  quality={quality}
+  inferSize
+  {...props}
+/>

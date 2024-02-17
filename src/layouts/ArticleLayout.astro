@@ -72,7 +72,7 @@ const nextArticle = await getNextWorkSeries(content);
           <div class="relative my-6 z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
             <Picture
               src={dynamicViteAssetImport(content.image.contentUrl)}
-              widths={[300, 600, 900, 1200]}
+              widths={[300, 600, 900]}
               alt={content.image.name || content.name}
               class="w-full"
             />

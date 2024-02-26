@@ -21,7 +21,7 @@ const isPartOf =
           href={article.path || article.url}
         >
           <Picture
-            src={dynamicViteAssetImport(article.image.contentUrl)}
+            src={article.image.contentUrl}
             widths={[100, 300, 600]}
             alt={article.image.name || article.name}
             class="object-cover transition-all"
@@ -56,9 +56,7 @@ const isPartOf =
                 {article.author?.image && (
                   <div class="relative h-5 w-5 flex-shrink-0">
                     <Picture
-                      src={dynamicViteAssetImport(
-                        article.author.image.contentUrl
-                      )}
+                      src={article.author.image.contentUrl}
                       alt={article.author.image.description || article.name}
                       widths={[20, 50]}
                       class="rounded-full"

@@ -51,7 +51,7 @@ const nextArticle = await getNextWorkSeries(content);
               content.author?.image && (
                 <Picture
                   src={content.author.image.contentUrl}
-                  alt={content.author.image.description || content.name}
+                  alt={content.author.image.description || content.author.name}
                   widths={[20, 50]}
                   class="rounded-full"
                 />
@@ -105,7 +105,7 @@ const nextArticle = await getNextWorkSeries(content);
                 <div class="relative flex-shrink-0 w-24 h-24 mt-1">
                   <Picture
                     src={content.author.image.contentUrl}
-                    alt={content.name}
+                    alt={content.author.image.description || content.author.name}
                     widths={[100, 200]}
                     class="rounded-full object-cover"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"

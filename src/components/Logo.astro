@@ -9,7 +9,13 @@ const {
 
 {
   icons.length > 0 ? (
-    <Image src={icons[0].src} alt={name} width={50} height={50} />
+    <Image
+      class="h-12 w-auto"
+      src={icons[0].src}
+      alt={name}
+      width={50}
+      height={50}
+    />
   ) : (
     <span class="text-lg">{name}</span>
   )

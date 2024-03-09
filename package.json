@@ -20,15 +20,15 @@
     "@astrojs/rss": "4.0.5",
     "@astrojs/tailwind": "5.1.0",
     "@fontsource/inter": "5.0.17",
-    "@galactiks/astro-integration": "0.3.7",
+    "@galactiks/astro-integration": "0.3.8",
     "@galactiks/config": "0.3.3",
     "@galactiks/explorer": "0.3.6",
     "@galactiks/sitemap": "0.1.2",
     "@tailwindcss/typography": "0.5.10",
-    "astro": "4.4.12",
+    "astro": "4.4.15",
     "astro-robots-txt": "1.0.0",
     "contentlayer": "0.3.4",
-    "flag-icons": "7.1.0",
+    "flag-icons": "7.2.0",
     "lodash.capitalize": "4.2.1",
     "mdx-bundler": "10.0.1",
     "react": "18.2.0",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@types/lodash.capitalize": "4.2.9",
-    "@typescript-eslint/parser": "7.1.0",
+    "@typescript-eslint/parser": "7.1.1",
     "eslint": "8.57.0",
     "eslint-plugin-astro": "0.31.4",
     "eslint-plugin-jsx-a11y": "6.8.0",
@@ -45,6 +45,6 @@
     "prettier-plugin-astro": "0.13.0",
     "rimraf": "5.0.5",
     "sharp": "0.33.2",
-    "typescript": "5.3.3"
+    "typescript": "5.4.2"
   }
 }

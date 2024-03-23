@@ -16,7 +16,7 @@ const isPartOf = page.isPartOf && (await getPageByIdentifier(page.isPartOf, { in
   class:list={["flex px-5 py-3 rounded-md", className]}
   aria-label="Breadcrumb"
 >
-  <ol class="inline-flex items-center space-x-1 md:space-x-3 list-none">
+  <ol class="inline-flex items-center space-x-1 lg:space-x-3 list-none">
     <li class="inline-flex items-center">
       <a
         href={homepage?.path}
@@ -57,7 +57,7 @@ const isPartOf = page.isPartOf && (await getPageByIdentifier(page.isPartOf, { in
             </svg>
             <a
               href={isPartOf.path}
-              class="ml-1 text-sm font-medium md:ml-2"
+              class="ml-1 text-sm font-medium lg:ml-2"
             >
               {isPartOf.name}
             </a>
@@ -82,7 +82,7 @@ const isPartOf = page.isPartOf && (await getPageByIdentifier(page.isPartOf, { in
             d="m1 9 4-4-4-4"></path>
         </svg>
         <span
-          class="ml-1 text-sm font-medium text-gray-500 md:ml-2 dark:text-gray-400"
+          class="ml-1 text-sm font-medium text-gray-500 lg:ml-2 dark:text-gray-400"
           >{page.name}</span
         >
       </div>

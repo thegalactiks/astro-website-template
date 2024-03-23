@@ -26,7 +26,7 @@ const nextArticle = await getNextWorkSeries(content);
 ---
 
 <PageLayout content={content}>
-  <div class="mx-auto max-w-4xl mt-16">
+  <div class="mx-auto max-w-4xl lg:mt-8">
     <div class="text-center">
       {
         isPartOf && (
@@ -52,7 +52,8 @@ const nextArticle = await getNextWorkSeries(content);
                 <Picture
                   src={content.author.image.contentUrl}
                   alt={content.author.image.description || content.author.name}
-                  widths={[20, 50]}
+                  widths={[32, 48]}
+                  sizes={`(max-width: 360px) 32px, 48px`}
                   class="rounded-full"
                 />
               )
@@ -72,6 +73,7 @@ const nextArticle = await getNextWorkSeries(content);
             <Picture
               src={content.image.contentUrl}
               widths={[300, 600, 900]}
+              sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
               alt={content.image.name || content.name}
               class="w-full"
             />
@@ -85,7 +87,7 @@ const nextArticle = await getNextWorkSeries(content);
 
       {
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
-          <div class="my-4 flex flex-wrap items-center w-full gap-3 md:w-auto">
+          <div class="my-4 flex flex-wrap items-center w-full gap-3 lg:w-auto">
             {content.keywords.map((keyword) => (
               <TagItem
                 class="text-sm text-gray-500"
@@ -105,8 +107,11 @@ const nextArticle = await getNextWorkSeries(content);
                 <div class="relative flex-shrink-0 w-24 h-24 mt-1">
                   <Picture
                     src={content.author.image.contentUrl}
-                    alt={content.author.image.description || content.author.name}
-                    widths={[100, 200]}
+                    alt={
+                      content.author.image.description || content.author.name
+                    }
+                    widths={[60, 100]}
+                    sizes={`(max-width: 360px) 60px, 100px`}
                     class="rounded-full object-cover"
                     style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
                   />

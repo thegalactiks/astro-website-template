@@ -14,6 +14,7 @@ const {
   formats = ["avif", "webp"],
   quality = "mid",
   widths = [200, 450, 900, 1250],
+  inferSize = true,
   ...props
 } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -32,6 +33,6 @@ if (!images[srcPath]) {
   widths={widths}
   formats={formats}
   quality={quality}
-  inferSize
+  inferSize={inferSize}
   {...props}
 />

@@ -2,7 +2,7 @@
 import { getPageByIdentifier, type Article } from "@galactiks/explorer";
 
 import { dynamicViteAssetImport } from "@lib/image.mjs";
-import Picture from "./Picture.astro"
+import Picture from "./Picture.astro";
 import Time from "./Time.astro";
 
 type Props = { class?: string; article: Article };
@@ -16,64 +16,60 @@ const isPartOf =
   <div class="rounded-md bg-primary-background transition-all hover:scale-105">
     {
       article.image && (
-        <a
-          class="relative block aspect-square"
-          href={article.path || article.url}
-        >
+        <a class="block" href={article.path || article.url}>
           <Picture
             src={article.image.contentUrl}
-            widths={[100, 300, 600]}
+            widths={[360]}
             alt={article.image.name || article.name}
-            class="object-cover transition-all"
+            class="object-cover transition-all lg:h-80 h-64"
           />
         </a>
       )
     }
   </div>
   <div>
-    <div>
-      <a href={article.path || article.url} class="no-underline">
-        <h2 class="text-lg font-semibold leading-snug tracking-tight my-2">
-          {article.name}
-        </h2>
-      </a>
-      {
-        isPartOf && (
-          <div class="flex gap-3">
-            <a href={isPartOf.path}>
-              <span class="inline-block text-xs font-medium tracking-wider uppercase mt-5 text-emerald-700">
-                {isPartOf.name}
-              </span>
-            </a>
-          </div>
-        )
-      }
-      <div class="mt-2 flex items-center space-x-3 text-gray-500">
-        <div class="flex items-center gap-3">
-          {
-            article.author && (
-              <>
-                {article.author?.image && (
-                  <div class="relative h-5 w-5 flex-shrink-0">
-                    <Picture
-                      src={article.author.image.contentUrl}
-                      alt={article.author.image.description || article.name}
-                      widths={[20, 50]}
-                      class="rounded-full"
-                    />
-                  </div>
-                )}
-                <span class="truncate text-sm">{article.author?.name}</span>
-                <span class="text-xs text-gray-300">•</span>
-              </>
-            )
-          }
-          <Time
-            class="truncate text-sm"
-            inLanguage={article.inLanguage}
-            datetime={article.datePublished}
-          />
+    <a href={article.path || article.url} class="no-underline">
+      <h2 class="text-lg font-semibold leading-snug tracking-tight">
+        {article.name}
+      </h2>
+    </a>
+    {
+      isPartOf && (
+        <div class="flex gap-3">
+          <a href={isPartOf.path}>
+            <span class="inline-block text-xs font-medium tracking-wider uppercase text-emerald-700">
+              {isPartOf.name}
+            </span>
+          </a>
         </div>
+      )
+    }
+    <div class="mt-2 flex items-center space-x-3 text-gray-500">
+      <div class="flex items-center gap-3">
+        {
+          article.author && (
+            <>
+              {article.author?.image && (
+                <div class="relative h-5 w-5 flex-shrink-0">
+                  <Picture
+                    src={article.author.image.contentUrl}
+                    alt={article.author.image.description || article.name}
+                    widths={[32, 48]}
+                    sizes={`(max-width: 360px) 32px, 48px`}
+                    class="rounded-full"
+                  />
+                </div>
+              )}
+              <span class="truncate text-sm">{article.author?.name}</span>
+              <span class="text-xs text-gray-300">•</span>
+            </>
+          )
+        }
+        <Time
+          class="truncate text-sm"
+          inLanguage={article.inLanguage}
+          datetime={article.datePublished}
+        />
       </div>
     </div>
   </div>

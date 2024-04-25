@@ -29,13 +29,13 @@ const isPartOf =
   </div>
   <div>
     <a href={article.path || article.url} class="no-underline">
-      <h2 class="text-lg font-semibold leading-snug tracking-tight">
+      <h2 class="my-1 leading-snug tracking-tight">
         {article.name}
       </h2>
     </a>
     {
       isPartOf && (
-        <div class="flex gap-3">
+        <div class="flex">
           <a href={isPartOf.path}>
             <span class="inline-block text-xs font-medium tracking-wider uppercase text-emerald-700">
               {isPartOf.name}

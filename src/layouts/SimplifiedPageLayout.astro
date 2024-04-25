@@ -1,14 +1,25 @@
 ---
-import type { Content } from "@galactiks/explorer";
+import {
+  type Content,
+  getSamePartOfPages,
+  getRelatedPages,
+} from "@galactiks/explorer";
 
 import PageLayout from "./PageLayout.astro";
 import Breadcrumb from "@components/Breadcrumb.astro";
 import TagItem from "@components/TagItem.astro";
 import Picture from "@components/Picture.astro";
+import ArticleCard from "@components/ArticleCard.astro";
 
 type Props = { content: Content };
 
 const { content } = Astro.props;
+
+const samePartOfPages = (await getSamePartOfPages(content)).slice(0, 3);
+const relatedPages = (await getRelatedPages(content, samePartOfPages)).slice(
+  0,
+  3
+);
 ---
 
 <PageLayout class="my-6 prose max-w-screen-lg mx-auto" content={content}>
@@ -37,6 +48,26 @@ const { content } = Astro.props;
             keyword={keyword}
             inLanguage={content.inLanguage}
           />
+        ))}
+      </div>
+    )
+  }
+
+  {
+    relatedPages.length > 0 && (
+      <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+        {relatedPages.map((page) => (
+          <ArticleCard article={page} />
+        ))}
+      </div>
+    )
+  }
+
+  {
+    samePartOfPages.length > 0 && (
+      <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+        {samePartOfPages.map((page) => (
+          <ArticleCard article={page} />
         ))}
       </div>
     )

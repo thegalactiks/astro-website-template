@@ -4,6 +4,8 @@ import {
   getPageByIdentifier,
   getPreviousWorkSeries,
   getNextWorkSeries,
+  getSamePartOfPages,
+  getRelatedPages,
 } from "@galactiks/explorer";
 
 import Article from "@components/Article.astro";
@@ -23,6 +25,9 @@ const isPartOf =
 
 const previousArticle = await getPreviousWorkSeries(content);
 const nextArticle = await getNextWorkSeries(content);
+
+const samePartOfArticles = (await getSamePartOfPages(content)).slice(0, 3);
+const relatedArticles = (await getRelatedPages(content, samePartOfArticles)).slice(0, 3);
 ---
 
 <PageLayout content={content}>
@@ -133,11 +138,35 @@ const nextArticle = await getNextWorkSeries(content);
       }
     </Article>
 
-    <div class="my-4 grid grid-cols-2 gap-4">
-      {previousArticle && <ArticleCard article={previousArticle} />}
+    {
+      (previousArticle || nextArticle) && (
+        <div class="my-4 grid grid-cols-2 gap-4">
+          {previousArticle && <ArticleCard article={previousArticle} />}
 
-      {nextArticle && <ArticleCard article={nextArticle} />}
-    </div>
+          {nextArticle && <ArticleCard article={nextArticle} />}
+        </div>
+      )
+    }
+
+    {
+      relatedArticles.length > 0 && (
+        <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+          {relatedArticles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      samePartOfArticles.length > 0 && (
+        <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+          {samePartOfArticles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      )
+    }
 
     <Breadcrumb page={content} />
   </div>

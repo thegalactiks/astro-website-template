@@ -3,10 +3,10 @@ import type { Content } from "@galactiks/explorer";
 
 import Footer from "@components/Footer.astro";
 import Navbar from "@components/Navbar.astro";
-import BaseLayout from "./BaseLayout.astro";
 import Container from "@components/Container.astro";
+import BaseLayout from "./BaseLayout.astro";
 
-type Props = { content: Content, class?: string };
+type Props = { content: Content; class?: string };
 
 const { content, class: className } = Astro.props;
 ---

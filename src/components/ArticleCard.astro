@@ -16,12 +16,12 @@ const isPartOf =
   <div class="rounded-md bg-primary-background transition-all hover:scale-105">
     {
       article.image && (
-        <a class="block" href={article.path || article.url}>
+        <a class="block my-6" href={article.path || article.url}>
           <Picture
             src={article.image.contentUrl}
             widths={[360]}
             alt={article.image.name || article.name}
-            class="object-cover transition-all lg:h-80 h-64"
+            class="my-1 object-cover transition-all lg:h-80 h-64"
           />
         </a>
       )
@@ -29,7 +29,7 @@ const isPartOf =
   </div>
   <div>
     <a href={article.path || article.url} class="no-underline">
-      <h2 class="my-1 leading-snug tracking-tight">
+      <h2 class="my-1 text-xl font-semibold leading-snug tracking-tight">
         {article.name}
       </h2>
     </a>

@@ -40,36 +40,36 @@ const relatedPages = (await getRelatedPages(content, samePartOfPages)).slice(
   <slot />
 
   {
-    Array.isArray(content.keywords) && content.keywords.length > 0 && (
-      <div class="my-4 flex flex-wrap items-center w-full gap-3 lg:w-auto">
-        {content.keywords.slice(0, 3).map((keyword) => (
-          <TagItem
-            class="text-sm text-gray-500"
-            keyword={keyword}
-            inLanguage={content.inLanguage}
-          />
-        ))}
-      </div>
-    )
-  }
+    !content.listingPage && (
+      <>
+        {Array.isArray(content.keywords) && content.keywords.length > 0 && (
+          <div class="my-4 flex flex-wrap items-center w-full gap-3 lg:w-auto">
+            {content.keywords.slice(0, 3).map((keyword) => (
+              <TagItem
+                class="text-sm text-gray-500"
+                keyword={keyword}
+                inLanguage={content.inLanguage}
+              />
+            ))}
+          </div>
+        )}
 
-  {
-    relatedPages.length > 0 && (
-      <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
-        {relatedPages.map((page) => (
-          <ArticleCard article={page} />
-        ))}
-      </div>
-    )
-  }
+        {relatedPages.length > 0 && (
+          <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedPages.map((page) => (
+              <ArticleCard article={page} />
+            ))}
+          </div>
+        )}
 
-  {
-    samePartOfPages.length > 0 && (
-      <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
-        {samePartOfPages.map((page) => (
-          <ArticleCard article={page} />
-        ))}
-      </div>
+        {samePartOfPages.length > 0 && (
+          <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+            {samePartOfPages.map((page) => (
+              <ArticleCard article={page} />
+            ))}
+          </div>
+        )}
+      </>
     )
   }
 

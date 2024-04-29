@@ -27,12 +27,14 @@ const previousArticle = await getPreviousWorkSeries(content);
 const nextArticle = await getNextWorkSeries(content);
 
 const samePartOfArticles = (await getSamePartOfPages(content)).slice(0, 3);
-const relatedArticles = (await getRelatedPages(content, samePartOfArticles)).slice(0, 3);
+const relatedArticles = (
+  await getRelatedPages(content, samePartOfArticles)
+).slice(0, 3);
 ---
 
 <PageLayout content={content}>
-  <div class="mx-auto max-w-4xl lg:mt-8">
-    <div class="text-center">
+  <div class="mx-auto max-w-8xl my-8">
+    <div class="mx-auto max-w-4xl text-center">
       {
         isPartOf && (
           <a
@@ -87,7 +89,7 @@ const relatedArticles = (await getRelatedPages(content, samePartOfArticles)).sli
       }
     </div>
 
-    <Article class="mx-auto mt-12 max-w-3xl">
+    <Article class="mx-auto my-12 max-w-3xl">
       <slot />
 
       {

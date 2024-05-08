@@ -1,27 +1,23 @@
 ---
 import {
   type Content,
-  getPageByIdentifier,
   getPreviousWorkSeries,
   getNextWorkSeries,
   getSamePartOfPages,
   getRelatedPages,
 } from "@galactiks/explorer";
 
-import Article from "@components/Article.astro";
-import Breadcrumb from "@components/Breadcrumb.astro";
-import Picture from "@components/Picture.astro";
-import TagItem from "@components/TagItem.astro";
-import Time from "@components/Time.astro";
+import ArticleCard from "@/components/ArticleCard.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Picture from "@/components/Picture.astro";
+import TagItem from "@/components/TagItem.astro";
+import Time from "@/components/Time.astro";
 
 import PageLayout from "./PageLayout.astro";
-import ArticleCard from "@components/ArticleCard.astro";
 
 type Props = { content: Content };
 
 const { content } = Astro.props;
-const isPartOf =
-  content.isPartOf && (await getPageByIdentifier(content.isPartOf));
 
 const previousArticle = await getPreviousWorkSeries(content);
 const nextArticle = await getNextWorkSeries(content);
@@ -33,68 +29,46 @@ const relatedArticles = (
 ---
 
 <PageLayout content={content}>
-  <div class="mx-auto max-w-8xl my-8">
-    <div class="mx-auto max-w-4xl text-center">
+  <div class="relative container max-w-screen-lg py-10">
+    <article class="prose dark:prose-invert max-w-none">
       {
-        isPartOf && (
-          <a
-            href={isPartOf.path}
-            class="text-primary inline-block text-xs font-medium tracking-wider uppercase"
-          >
-            {isPartOf.name}
-          </a>
+        content.image && (
+          <Picture
+            class="rounded-xl overflow-hidden my-3 object-cover"
+            src={content.image.contentUrl}
+            widths={[300, 600, 900]}
+            sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
+            alt={content.image.name || content.name}
+            transition:name={`img-${content.identifier}`}
+          />
         )
       }
+      <div class="flex items-center justify-between">
+        <Time
+          class="font-medium text-muted-foreground"
+          inLanguage={content.inLanguage}
+          datetime={content.datePublished}
+          transition:name={`date-${content.identifier}`}
+        />
+      </div>
+
       <h1
-        class="text-3xl lg:text-4xl font-bold lg:tracking-tight mt-5 lg:leading-tight"
+        class="font-heading text-4xl my-4"
+        transition:name={`title-${content.identifier}`}
       >
         {content.name}
       </h1>
+      <p>{content.description}</p>
 
-      <div class="flex justify-center mt-3 space-x-3 text-gray-500">
-        <div class="flex items-center">
-          <div class="relative flex-shrink-0 w-10 h-10">
-            {
-              content.author?.image && (
-                <Picture
-                  src={content.author.image.contentUrl}
-                  alt={content.author.image.description || content.author.name}
-                  widths={[32, 48]}
-                  sizes={`(max-width: 360px) 32px, 48px`}
-                  class="rounded-full"
-                />
-              )
-            }
-          </div>
-          <Time
-            class="text-gray-500"
-            inLanguage={content.inLanguage}
-            datetime={content.datePublished}
-          />
-        </div>
-      </div>
+      <hr class="my-6" />
 
-      {
-        content.image && (
-          <div class="relative my-6 z-0 max-w-screen-lg mx-auto overflow-hidden lg:rounded-lg aspect-video">
-            <Picture
-              src={content.image.contentUrl}
-              widths={[300, 600, 900]}
-              sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
-              alt={content.image.name || content.name}
-              class="w-full"
-            />
-          </div>
-        )
-      }
-    </div>
-
-    <Article class="mx-auto my-12 max-w-3xl">
       <slot />
+
+      <hr class="my-6" />
 
       {
         Array.isArray(content.keywords) && content.keywords.length > 0 && (
-          <div class="my-4 flex flex-wrap items-center w-full gap-3 lg:w-auto">
+          <div class="my-6 flex flex-wrap items-center w-full gap-3 lg:w-auto">
             {content.keywords.map((keyword) => (
               <TagItem
                 class="text-sm text-gray-500"
@@ -138,11 +112,13 @@ const relatedArticles = (
           </div>
         )
       }
-    </Article>
+    </article>
+  </div>
 
+  <div class="relative container max-w-screen-xl py-6 space-y-12">
     {
       (previousArticle || nextArticle) && (
-        <div class="my-4 grid grid-cols-2 gap-4">
+        <div class="my-4 grid grid-cols-2 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
           {previousArticle && <ArticleCard article={previousArticle} />}
 
           {nextArticle && <ArticleCard article={nextArticle} />}
@@ -152,7 +128,7 @@ const relatedArticles = (
 
     {
       relatedArticles.length > 0 && (
-        <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
           {relatedArticles.map((article) => (
             <ArticleCard article={article} />
           ))}
@@ -162,14 +138,16 @@ const relatedArticles = (
 
     {
       samePartOfArticles.length > 0 && (
-        <div class="my-4 grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
           {samePartOfArticles.map((article) => (
             <ArticleCard article={article} />
           ))}
         </div>
       )
     }
+  </div>
 
+  <div class="relative container max-w-screen-xl py-10">
     <Breadcrumb page={content} />
   </div>
 </PageLayout>

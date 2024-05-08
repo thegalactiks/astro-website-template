@@ -1,6 +1,18 @@
 ---
 import { getConfig } from "@galactiks/config";
-import { getHomePage, getPageByIdentifier, type Page } from "@galactiks/explorer";
+import {
+  getHomePage,
+  getPageByIdentifier,
+  type Page,
+} from "@galactiks/explorer";
+import {
+  Breadcrumb as AstroBreadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 type Props = { page: Page; class?: string };
 const { page, class: className } = Astro.props;
@@ -8,84 +20,36 @@ const { page, class: className } = Astro.props;
 const {
   webManifest: { name },
 } = getConfig();
-const homepage = await getHomePage({ inLanguage: page.inLanguage })
-const isPartOf = page.isPartOf && (await getPageByIdentifier(page.isPartOf, { inLanguage: page.inLanguage }));
+const homepage = await getHomePage({ inLanguage: page.inLanguage });
+const isPartOf =
+  page.isPartOf &&
+  (await getPageByIdentifier(page.isPartOf, { inLanguage: page.inLanguage }));
 ---
 
-<nav
-  class:list={["flex px-5 py-3 rounded-md", className]}
-  aria-label="Breadcrumb"
->
-  <ol class="inline-flex items-center space-x-1 lg:space-x-3 list-none">
-    <li class="inline-flex items-center">
-      <a
-        href={homepage?.path}
-        class="inline-flex items-center text-sm font-medium text-gray-700"
-      >
-        <svg
-          class="w-3 h-3 mr-2.5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"
-          ></path>
-        </svg>
+<AstroBreadcrumb className={className}>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href={homepage?.path || "/"}>
         {name}
-      </a>
-    </li>
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+
     {
       isPartOf && (
-        <li>
-          <div class="flex items-center">
-            <svg
-              class="w-3 h-3 mx-1"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-            <a
-              href={isPartOf.path}
-              class="ml-1 text-sm font-medium lg:ml-2"
-            >
+        <>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={isPartOf.path}>
               {isPartOf.name}
-            </a>
-          </div>
-        </li>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </>
       )
     }
-    <li aria-current="page">
-      <div class="flex items-center">
-        <svg
-          class="w-3 h-3 mx-1 text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 6 10"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 9 4-4-4-4"></path>
-        </svg>
-        <span
-          class="ml-1 text-sm font-medium text-gray-500 lg:ml-2 dark:text-gray-400"
-          >{page.name}</span
-        >
-      </div>
-    </li>
-  </ol>
-</nav>
+
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>{page.name}</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</AstroBreadcrumb>

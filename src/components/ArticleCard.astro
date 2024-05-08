@@ -1,6 +1,7 @@
 ---
 import { getPageByIdentifier, type Article } from "@galactiks/explorer";
 
+import { Badge } from "@/components/ui/badge";
 import Picture from "./Picture.astro";
 import Time from "./Time.astro";
 
@@ -9,67 +10,55 @@ type Props = { class?: string; article: Article };
 const { class: className, article } = Astro.props;
 const isPartOf =
   article.isPartOf && (await getPageByIdentifier(article.isPartOf));
+
+const href = article.path || article.url;
 ---
 
-<div class:list={["group cursor-pointer", className]}>
-  <div class="rounded-md bg-primary-background transition-all hover:scale-105">
+<div class:list={["group space-y-3", className]}>
+  <a
+    href={href}
+    class="block group-hover:-translate-y-1 group-hover:shadow-lg transition duration-200"
+  >
     {
       article.image && (
-        <a class="block my-6" href={article.path || article.url}>
-          <Picture
-            src={article.image.contentUrl}
-            widths={[360]}
-            alt={article.image.name || article.name}
-            class="my-1 object-cover transition-all lg:h-80 h-64"
-          />
+        <Picture
+          class="w-full h-52 object-cover rounded-xl overflow-hidden"
+          src={article.image.contentUrl}
+          widths={[360]}
+          alt={article.image.name || article.name}
+          transition:name={`img-${href}`}
+        />
+      )
+    }
+  </a>
+
+  <div class="flex items-center justify-between">
+    {
+      isPartOf && (
+        <a href={isPartOf.path} transition:name={`badge-cat-${isPartOf.path}`}>
+          <Badge radius="md" className="capitalize">
+            {isPartOf.name}
+          </Badge>
         </a>
       )
     }
+
+    <Time
+      class="font-medium text-muted-foreground text-sm"
+      inLanguage={article.inLanguage}
+      datetime={article.datePublished}
+      transition:name={`date-${article.identifier}`}
+    />
   </div>
+
   <div>
-    <a href={article.path || article.url} class="no-underline">
-      <h2 class="my-1 text-xl font-semibold leading-snug tracking-tight">
+    <a href={href} class="group-hover:text-primary">
+      <h2
+        class="font-heading text-xl md:text-2xl leading-snug hover:text-primary"
+        transition:name={`title-${article.identifier}`}
+      >
         {article.name}
       </h2>
     </a>
-    {
-      isPartOf && (
-        <div class="flex">
-          <a href={isPartOf.path}>
-            <span class="inline-block text-xs font-medium tracking-wider uppercase text-emerald-700">
-              {isPartOf.name}
-            </span>
-          </a>
-        </div>
-      )
-    }
-    <div class="mt-2 flex items-center space-x-3 text-gray-500">
-      <div class="flex items-center gap-3">
-        {
-          article.author && (
-            <>
-              {article.author?.image && (
-                <div class="relative h-5 w-5 flex-shrink-0">
-                  <Picture
-                    src={article.author.image.contentUrl}
-                    alt={article.author.image.description || article.name}
-                    widths={[32, 48]}
-                    sizes={`(max-width: 360px) 32px, 48px`}
-                    class="rounded-full"
-                  />
-                </div>
-              )}
-              <span class="truncate text-sm">{article.author?.name}</span>
-              <span class="text-xs text-gray-300">•</span>
-            </>
-          )
-        }
-        <Time
-          class="truncate text-sm"
-          inLanguage={article.inLanguage}
-          datetime={article.datePublished}
-        />
-      </div>
-    </div>
   </div>
 </div>

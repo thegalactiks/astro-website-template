@@ -1,23 +1,63 @@
 ---
-import type { Content } from "@galactiks/explorer";
+import { getConfig, getDefaultLanguage } from "@galactiks/config";
+import {
+  type Content,
+  getHomePage,
+  getSiteNavigationElement,
+} from "@galactiks/explorer";
 
-import Footer from "@components/Footer.astro";
-import Navbar from "@components/Navbar.astro";
-import Container from "@components/Container.astro";
+import Footer from "@/components/Footer.astro";
+import { MainNavigationMenu } from "@/components/MainNavigationMenu";
 import BaseLayout from "./BaseLayout.astro";
+import Logo from "@/components/Logo.astro";
 
 type Props = { content: Content; class?: string };
 
 const { content, class: className } = Astro.props;
+
+const inLanguageOrDefault = content.inLanguage || getDefaultLanguage();
+const { name } = getConfig();
+
+const navigationElement = await getSiteNavigationElement({
+  inLanguage: inLanguageOrDefault,
+});
+const items = navigationElement?.itemListElement || [];
+const homepage = await getHomePage({ inLanguage: inLanguageOrDefault });
+const homepagePath = homepage?.path || "/";
 ---
 
 <BaseLayout content={content}>
-  <Navbar inLanguage={content.inLanguage} />
+  <header
+    class="flex items-center h-16 md:h-18 bg-background border-b"
+  >
+    <div class="relative container flex items-center justify-between w-full">
+      <div class="flex items-center gap-6 md:gap-8 lg:gap-10">
+        <a href={homepagePath} class="hidden items-center space-x-2 md:flex">
+          <Logo class="size-8" />
+          <span class="hidden font-bold sm:inline-block">
+            {name}
+          </span>
+        </a>
 
-  <main>
-    <Container class={className}>
-      <slot />
-    </Container>
+        <div class="hidden md:flex">
+          <MainNavigationMenu items={items} client:load />
+        </div>
+      </div>
+
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-4 -translate-y-4 md:hidden"
+      >
+        <a href={homepagePath}>
+          <Logo class="size-8" />
+        </a>
+      </div>
+
+      <slot name="right-header" />
+    </div>
+  </header>
+
+  <main class:list={["flex-1", className]}>
+    <slot />
   </main>
 
   <Footer content={content} />

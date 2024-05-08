@@ -1,0 +1,39 @@
+---
+import type { Content } from "@galactiks/explorer";
+
+import PageLayout from "./PageLayout.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Picture from "@/components/Picture.astro";
+import ArticlesList from "@/components/ArticlesList.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+---
+
+<PageLayout content={content}>
+  <div class="my-6 max-w-screen-xl mx-auto">
+    {
+      content.image && (
+        <Picture
+          class="rounded-xl overflow-hidden my-3 object-cover"
+          src={content.image.contentUrl}
+          widths={[300, 600, 900]}
+          sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
+          alt={content.image.name || content.name}
+          transition:name={`img-${content.identifier}`}
+        />
+      )
+    }
+
+    <ArticlesList {...content} />
+
+    <div class="prose">
+      <slot />
+    </div>
+  </div>
+
+  <div class="my-6 max-w-screen-xl mx-auto">
+    <Breadcrumb page={content} class="mt-6" />
+  </div>
+</PageLayout>

@@ -1,6 +1,4 @@
 ---
-import type { Content } from "@galactiks/explorer";
-
 type Props = {
   currentLang?: string;
   languages: Array<{ href: string; hreflang: string }>;
@@ -54,6 +52,7 @@ const languageNames = new Intl.DisplayNames([currentLang], {
               class="text-gray-700 hover:text-gray-900 hover:bg-gray-100 block px-4 py-2 text-sm"
               href={href}
               title={hreflang}
+              hreflang={hreflang}
             >
               <bdi>{languageNames.of(hreflang)}</bdi>
             </a>

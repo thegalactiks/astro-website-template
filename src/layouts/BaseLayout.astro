@@ -1,18 +1,20 @@
 ---
 import "@fontsource/inter";
+import "@/styles/globals.css";
+
 import type { Content } from "@galactiks/explorer";
-import BaseLayout from "@galactiks/astro-integration/components/BaseLayout.astro";
+import GalactiksBaseLayout from "@galactiks/astro-integration/components/BaseLayout.astro";
 
 type Props = { content?: Content };
 
 const { content } = Astro.props;
 ---
 
-<BaseLayout content={content} class:list={["h-screen", "bg-primary-background"]}>
+<GalactiksBaseLayout content={content} class="flex flex-col min-h-screen">
   <slot name="head" slot="head">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
   </slot>
 
   <slot />
-</BaseLayout>
+</GalactiksBaseLayout>

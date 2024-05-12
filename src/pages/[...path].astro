@@ -1,22 +1,32 @@
 ---
 import type { Content } from "@galactiks/explorer";
 
-import ArticleList from "@components/ArticlesList.astro";
-import ArticleLayout from "@layouts/ArticleLayout.astro";
-import SimplifiedPageLayout from "@layouts/SimplifiedPageLayout.astro";
+import { BodyContent } from "@/components/BodyContent";
+import ArticleLayout from "@/layouts/ArticleLayout.astro";
+import ListingPageLayout from "@/layouts/ListingPageLayout.astro";
+import SimplifiedPageLayout from "@/layouts/SimplifiedPageLayout.astro";
 
 export { getStaticPaths } from "@galactiks/astro-integration";
 
 type Props = { page: Content };
 
 const { page } = Astro.props;
-const { Content } = page.body.render();
 
-const Layout = page.type === "Article" ? ArticleLayout : SimplifiedPageLayout;
+const getLayout = (page: Content) => {
+  if (page.type === "Article") {
+    return ArticleLayout;
+  }
+
+  if (page.listingPage) {
+    return ListingPageLayout;
+  }
+
+  return SimplifiedPageLayout;
+};
+
+const Layout = getLayout(page);
 ---
 
 <Layout content={page}>
-  {page.listingPage && <ArticleList {...page} />}
-
-  {Content && <Content />}
+  <BodyContent content={page} />
 </Layout>

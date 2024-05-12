@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/check": "0.6.0",
     "@astrojs/partytown": "2.1.0",
-    "@astrojs/react": "3.3.2",
+    "@astrojs/react": "3.3.4",
     "@astrojs/rss": "4.0.5",
     "@astrojs/tailwind": "5.1.0",
     "@fontsource/inter": "5.0.18",
@@ -29,9 +29,9 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@tailwindcss/typography": "0.5.13",
-    "@types/react": "18.3.1",
+    "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
-    "astro": "4.7.1",
+    "astro": "4.8.2",
     "astro-icon": "^1.1.0",
     "astro-robots-txt": "1.0.0",
     "class-variance-authority": "^0.7.0",
@@ -55,7 +55,7 @@
     "eslint-plugin-jsx-a11y": "6.8.0",
     "prettier": "3.2.5",
     "prettier-plugin-astro": "0.13.0",
-    "rimraf": "5.0.5",
+    "rimraf": "5.0.7",
     "sharp": "0.33.3",
     "typescript": "5.4.5"
   }

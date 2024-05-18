@@ -4,8 +4,10 @@ import type React from "react";
 
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
+  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 
@@ -17,19 +19,28 @@ export function MainNavigationMenu({ items }: MainNavigationMenuProps) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        <NavigationMenuItem>
-          {items.map((item) => (
-            <a
-              key={item.path}
-              href={item.path || item.url}
-              className={navigationMenuTriggerStyle()}
-            >
-              {item.name}
-            </a>
+        {items.map((item) => Array.isArray(item.itemListElement)
+          ? (
+            <NavigationMenuItem key={item.path}>
+              <NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                  {item.itemListElement.map((_item) => (
+                    <ListItem key={_item._id} {..._item} />
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          )
+          : (
+            <NavigationMenuItem>
+              <a href={item.path || item.url} className={navigationMenuTriggerStyle()}>
+                {item.name}
+              </a>
+            </NavigationMenuItem>
           ))}
-        </NavigationMenuItem>
       </NavigationMenuList>
-    </NavigationMenu>
+    </NavigationMenu >
   );
 }
 

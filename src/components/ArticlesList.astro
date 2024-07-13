@@ -4,7 +4,6 @@ import {
   getPagesPartOfRecursively,
   getPagesWithKeywordIdentifier,
 } from "@galactiks/explorer";
-import capitalize from "lodash.capitalize";
 import ArticleCard from "./ArticleCard.astro";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +25,7 @@ const orderedArticles = articles
 ---
 
 <section class={cn("container py-10", className)}>
-  <h1 class="inline-block font-heading text-4xl">{capitalize(name)}</h1>
+  <h1 class="inline-block font-heading text-4xl">{name}</h1>
 
   <hr class="my-6" />
 

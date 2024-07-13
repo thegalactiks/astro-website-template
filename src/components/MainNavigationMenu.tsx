@@ -19,14 +19,14 @@ export function MainNavigationMenu({ items }: MainNavigationMenuProps) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {items.map((item) => Array.isArray(item.itemListElement)
+        {items.map((item, i) => Array.isArray(item.itemListElement)
           ? (
-            <NavigationMenuItem key={item.path}>
+            <NavigationMenuItem key={`${item.path}-${i}`}>
               <NavigationMenuTrigger>{item.name}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  {item.itemListElement.map((_item) => (
-                    <ListItem key={_item._id} {..._item} />
+                  {item.itemListElement.map((_item, _i) => (
+                    <ListItem key={`${_item._id}-${_i}`} {..._item} />
                   ))}
                 </ul>
               </NavigationMenuContent>

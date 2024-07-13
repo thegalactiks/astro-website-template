@@ -27,7 +27,7 @@ const relatedPages = (await getRelatedPages(content, samePartOfPages)).slice(
     {
       content.image && (
         <Picture
-          class="rounded-xl overflow-hidden my-3 object-cover"
+          class="rounded-xl overflow-hidden my-3 object-cover max-h-96 w-full"
           src={content.image.contentUrl}
           widths={[300, 600, 900]}
           sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}

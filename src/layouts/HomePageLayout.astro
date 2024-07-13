@@ -1,0 +1,91 @@
+---
+import { type Content, getPages } from "@galactiks/explorer";
+
+import ArticleCard from "@/components/ArticleCard.astro";
+import HeroArticleCard from "@/components/HeroArticleCard.astro";
+import PageLayout from "./PageLayout.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+
+const articles = await getPages({
+  type: "Article",
+  inLanguage: content.inLanguage,
+});
+const orderedArticles = articles.sort((a, b) =>
+  a.position && b.position
+    ? a.position - b.position
+    : b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
+);
+const featuredArticles = orderedArticles.slice(0, 2);
+const latestArticles = orderedArticles.slice(2, 5);
+
+const pages = await getPages({
+  type: "Page",
+  inLanguage: content.inLanguage,
+});
+const orderedPages = pages
+  .sort((a, b) =>
+    a.position && b.position
+      ? a.position - b.position
+      : b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds()
+  )
+  .filter((page) => !page.listingPage)
+  .filter((page) => page.identifier !== "index")
+  .slice(0, 3);
+---
+
+<PageLayout content={content}>
+  <div class="my-6 max-w-screen-xl mx-auto space-y-8">
+    <h1
+      class="font-heading text-5xl my-8 mt-14"
+      transition:name={`title-${content.identifier}`}
+    >
+      {content.name}
+    </h1>
+
+    {
+      featuredArticles.length > 0 && (
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+          <div class="col-span-2 md:col-span-3">
+            <HeroArticleCard article={featuredArticles[0]} />
+          </div>
+          <div class="col-span-2 md:col-span-2">
+            <HeroArticleCard article={featuredArticles[1]} />
+          </div>
+        </div>
+      )
+    }
+
+    {
+      latestArticles.length > 0 && (
+        <>
+          <hr class="my-12" />
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+            {latestArticles.map((article) => (
+              <ArticleCard article={article} />
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    {
+      orderedPages.length > 0 && (
+        <>
+          <hr class="my-12" />
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+            {orderedPages.map((page) => (
+              <ArticleCard article={page} />
+            ))}
+          </div>
+        </>
+      )
+    }
+
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <slot />
+    </div>
+  </div>
+</PageLayout>

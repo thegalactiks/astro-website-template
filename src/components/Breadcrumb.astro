@@ -1,0 +1,56 @@
+---
+import { getConfig } from "@galactiks/config";
+import {
+  getHomePage,
+  getPageByIdentifier,
+  type Page,
+} from "@galactiks/explorer";
+import capitalize from "lodash.capitalize";
+import {
+  Breadcrumb as AstroBreadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+
+type Props = { page: Page; class?: string };
+const { page, class: className } = Astro.props;
+
+const {
+  webManifest: { name },
+} = getConfig();
+const homepage = await getHomePage({ inLanguage: page.inLanguage });
+const isPartOf =
+  page.isPartOf &&
+  (await getPageByIdentifier(page.isPartOf, { inLanguage: page.inLanguage }));
+---
+
+<AstroBreadcrumb className={className}>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href={homepage?.path || "/"}>
+        {name}
+      </BreadcrumbLink>
+    </BreadcrumbItem>
+
+    {
+      isPartOf && (
+        <>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={isPartOf.path}>
+              {isPartOf.name}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </>
+      )
+    }
+
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>{page.name}</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</AstroBreadcrumb>

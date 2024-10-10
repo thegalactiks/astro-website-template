@@ -1,0 +1,42 @@
+---
+import type { Article } from "@galactiks/explorer";
+
+import Picture from "./Picture.astro";
+
+type Props = { class?: string; article: Article };
+
+const { class: className, article } = Astro.props;
+
+const href = article.path || article.url;
+---
+
+<div class:list={["group space-y-3", className]}>
+  <a
+    href={href}
+    class="block group-hover:-translate-y-2 group-hover:shadow-lg transition duration-200"
+  >
+    {
+      article.image && (
+        <Picture
+          class="w-full h-96 object-cover rounded-xl overflow-hidden"
+          src={article.image.contentUrl}
+          widths={[300, 600, 900]}
+          sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
+          alt={article.image.name || article.name}
+          transition:name={`img-${href}`}
+        />
+      )
+    }
+  </a>
+
+  <div>
+    <a href={href} class="group-hover:text-primary">
+      <h2
+        class="font-heading text-xl md:text-2xl leading-snug hover:text-primary"
+        transition:name={`title-${article.identifier}`}
+      >
+        {article.name}
+      </h2>
+    </a>
+  </div>
+</div>

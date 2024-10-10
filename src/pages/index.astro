@@ -1,0 +1,14 @@
+---
+import { type Content, getIndexPage } from "@galactiks/astro-integration";
+
+import { BodyContent } from "@/components/BodyContent";
+import HomePageLayout from "@/layouts/HomePageLayout.astro";
+
+type Props = { page: Content };
+
+const page = await getIndexPage();
+---
+
+<HomePageLayout content={page}>
+  <BodyContent content={page} />
+</HomePageLayout>

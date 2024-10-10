@@ -1,0 +1,22 @@
+---
+import { getConfig } from "@galactiks/config";
+import { Image } from "astro:assets";
+
+const {
+  webManifest: { icons, name },
+} = getConfig();
+---
+
+{
+  icons.length > 0 ? (
+    <Image
+      class="max-h-14 w-auto"
+      src={icons[0].src}
+      alt={name}
+      width={50}
+      height={50}
+    />
+  ) : (
+    <span class="text-lg">{name}</span>
+  )
+}

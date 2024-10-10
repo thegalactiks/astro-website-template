@@ -1,0 +1,37 @@
+---
+import {
+  type Content,
+  getPagesPartOfRecursively,
+  getPagesWithKeywordIdentifier,
+} from "@galactiks/explorer";
+import ArticleCard from "./ArticleCard.astro";
+import { cn } from "@/lib/utils";
+
+type Props = Content & { class?: string };
+
+const { name, identifier, inLanguage, type, class: className } = Astro.props;
+
+const inLanguages = inLanguage !== undefined ? [inLanguage] : undefined;
+const articles = await (type === "Tag"
+  ? getPagesWithKeywordIdentifier(identifier, { inLanguages })
+  : getPagesPartOfRecursively(identifier, { inLanguages }));
+const orderedArticles = articles
+  .filter((page) => !page.listingPage)
+  .sort((a, b) =>
+    a.position && b.position
+      ? a.position - b.position
+      : b.datePublished.getMilliseconds() - a.datePublished.getMilliseconds(),
+  );
+---
+
+<section class={cn("container py-10", className)}>
+  <h1 class="inline-block font-heading text-4xl">{name}</h1>
+
+  <hr class="my-6" />
+
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8"
+  >
+    {orderedArticles.map((article) => <ArticleCard article={article} />)}
+  </div>
+</section>

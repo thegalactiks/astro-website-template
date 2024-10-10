@@ -1,0 +1,153 @@
+---
+import {
+  type Content,
+  getPreviousWorkSeries,
+  getNextWorkSeries,
+  getSamePartOfPages,
+  getRelatedPages,
+} from "@galactiks/explorer";
+
+import ArticleCard from "@/components/ArticleCard.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Picture from "@/components/Picture.astro";
+import TagItem from "@/components/TagItem.astro";
+import Time from "@/components/Time.astro";
+
+import PageLayout from "./PageLayout.astro";
+
+type Props = { content: Content };
+
+const { content } = Astro.props;
+
+const previousArticle = await getPreviousWorkSeries(content);
+const nextArticle = await getNextWorkSeries(content);
+
+const samePartOfArticles = (await getSamePartOfPages(content)).slice(0, 3);
+const relatedArticles = (
+  await getRelatedPages(content, samePartOfArticles)
+).slice(0, 3);
+---
+
+<PageLayout content={content}>
+  <div class="relative container max-w-screen-lg py-10">
+    <article class="prose dark:prose-invert max-w-none">
+      {
+        content.image && (
+          <Picture
+            class="rounded-xl overflow-hidden my-3 object-cover max-h-96 w-full"
+            src={content.image.contentUrl}
+            widths={[300, 600, 900]}
+            sizes={`(max-width: 360px) 300px, (max-width: 720px) 600px, 900px`}
+            alt={content.image.name || content.name}
+            transition:name={`img-${content.identifier}`}
+          />
+        )
+      }
+      <div class="flex items-center justify-between">
+        <Time
+          class="font-medium text-muted-foreground"
+          inLanguage={content.inLanguage}
+          datetime={content.datePublished}
+          transition:name={`date-${content.identifier}`}
+        />
+      </div>
+
+      <h1
+        class="font-heading text-4xl my-4"
+        transition:name={`title-${content.identifier}`}
+      >
+        {content.name}
+      </h1>
+      <p>{content.description}</p>
+
+      <hr class="my-6" />
+
+      <slot />
+
+      <hr class="my-6" />
+
+      {
+        Array.isArray(content.keywords) && content.keywords.length > 0 && (
+          <div class="my-6 flex flex-wrap items-center w-full gap-3 lg:w-auto">
+            {content.keywords.map((keyword) => (
+              <TagItem
+                class="text-sm text-gray-500"
+                keyword={keyword}
+                inLanguage={content.inLanguage}
+              />
+            ))}
+          </div>
+        )
+      }
+
+      {
+        content.author && (
+          <div class="my-6 px-8 py-4 text-gray-500 rounded-2xl bg-gray-50">
+            <div class="flex flex-wrap items-start sm:space-x-6 sm:flex-nowrap">
+              {content.author.image && (
+                <div class="relative flex-shrink-0 w-24 h-24 mt-1">
+                  <Picture
+                    src={content.author.image.contentUrl}
+                    alt={
+                      content.author.image.description || content.author.name
+                    }
+                    widths={[60, 100]}
+                    sizes={`(max-width: 360px) 60px, 100px`}
+                    class="rounded-full object-cover"
+                    style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
+                  />
+                </div>
+              )}
+              <div>
+                <div class="mb-3">
+                  <h3 class="text-lg font-medium text-gray-800">
+                    {content.author.name}
+                  </h3>
+                </div>
+                <div>
+                  <p>{content.author.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </article>
+  </div>
+
+  <div class="relative container max-w-screen-xl py-6 space-y-12">
+    {
+      (previousArticle || nextArticle) && (
+        <div class="my-4 grid grid-cols-2 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+          {previousArticle && <ArticleCard article={previousArticle} />}
+
+          {nextArticle && <ArticleCard article={nextArticle} />}
+        </div>
+      )
+    }
+
+    {
+      relatedArticles.length > 0 && (
+        <div class="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+          {relatedArticles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      )
+    }
+
+    {
+      samePartOfArticles.length > 0 && (
+        <div class="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8">
+          {samePartOfArticles.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="relative container max-w-screen-xl py-10">
+    <Breadcrumb page={content} />
+  </div>
+</PageLayout>

@@ -1,0 +1,85 @@
+---
+import { getConfig, getDefaultLanguage } from "@galactiks/config";
+import { type Content, getWebPageFooter } from "@galactiks/explorer";
+import LanguageSelector from "./LanguageSelector.astro";
+import { cn } from "@/lib/utils";
+
+const {
+  webManifest: { name },
+} = getConfig();
+
+type Props = {
+  content: Content;
+  className?: string;
+};
+const { content, className } = Astro.props;
+
+const footerElement = await getWebPageFooter({
+  inLanguage: content.inLanguage || getDefaultLanguage(),
+});
+const itemListElement = footerElement?.itemListElement || [];
+---
+
+<footer class={cn("border-t", className)}>
+  {
+    itemListElement.length > 0 && (
+      <div class="container grid grid-cols-1 gap-6 py-10 sm:grid-cols-2 md:grid-cols-5">
+        {itemListElement.map(
+          ({ path, url, name, itemListElement: _itemListElement }) => (
+            <div>
+              {!Array.isArray(_itemListElement) ||
+              _itemListElement.length == 0 ? (
+                <a
+                  href={path || url}
+                  class="text-sm text-muted-foreground hover:text-primary"
+                >
+                  {name}
+                </a>
+              ) : (
+                <>
+                  <span class="text-sm font-semibold text-muted-foreground">
+                    {name}
+                  </span>
+                  <ul role="presentation" class="list-inside my-2 space-y-3">
+                    {_itemListElement.map(
+                      ({ path: _path, url: _url, name: _name }) => (
+                        <li>
+                          <a
+                            href={_path || _url}
+                            class="text-sm text-muted-foreground hover:text-primary"
+                          >
+                            {_name}
+                          </a>
+                        </li>
+                      )
+                    )}
+                  </ul>
+                </>
+              )}
+            </div>
+          )
+        )}
+      </div>
+    )
+  }
+
+  <div class="border-t py-4">
+    <div class="container flex items-center justify-between">
+      <span class="text-muted-foreground text-sm">
+        {name}
+      </span>
+
+      {
+        Array.isArray(content.headers?.alternates) &&
+          content.headers?.alternates?.length > 2 && (
+            <div>
+              <LanguageSelector
+                currentLang={content.inLanguage}
+                languages={content.headers?.alternates}
+              />
+            </div>
+          )
+      }
+    </div>
+  </div>
+</footer>

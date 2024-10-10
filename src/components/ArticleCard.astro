@@ -1,0 +1,64 @@
+---
+import { getPageByIdentifier, type Article } from "@galactiks/explorer";
+
+import { Badge } from "@/components/ui/badge";
+import Picture from "./Picture.astro";
+import Time from "./Time.astro";
+
+type Props = { class?: string; article: Article };
+
+const { class: className, article } = Astro.props;
+const isPartOf =
+  article.isPartOf && (await getPageByIdentifier(article.isPartOf));
+
+const href = article.path || article.url;
+---
+
+<div class:list={["group space-y-3", className]}>
+  <a
+    href={href}
+    class="block group-hover:-translate-y-1 group-hover:shadow-lg transition duration-200"
+  >
+    {
+      article.image && (
+        <Picture
+          class="w-full h-52 object-cover rounded-xl overflow-hidden"
+          src={article.image.contentUrl}
+          widths={[360]}
+          alt={article.image.name || article.name}
+          transition:name={`img-${href}`}
+        />
+      )
+    }
+  </a>
+
+  <div class="flex items-center justify-between">
+    {
+      isPartOf && (
+        <a href={isPartOf.path} transition:name={`badge-cat-${isPartOf.path}`}>
+          <Badge radius="md" className="capitalize">
+            {isPartOf.name}
+          </Badge>
+        </a>
+      )
+    }
+
+    <Time
+      class="font-medium text-muted-foreground text-sm"
+      inLanguage={article.inLanguage}
+      datetime={article.datePublished}
+      transition:name={`date-${article.identifier}`}
+    />
+  </div>
+
+  <div>
+    <a href={href} class="group-hover:text-primary">
+      <h2
+        class="font-heading text-lg md:text-xl leading-snug hover:text-primary"
+        transition:name={`title-${article.identifier}`}
+      >
+        {article.name}
+      </h2>
+    </a>
+  </div>
+</div>
